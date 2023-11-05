@@ -5,5 +5,4 @@ enum class Destinations {
     Discover,
     Category,
     Favorite,
-    Contact,
-}
+    BeerDetail}
