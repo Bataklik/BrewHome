@@ -1,4 +1,4 @@
-package com.example.brewhome.components
+package com.example.brewhome.layout
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -13,14 +13,14 @@ import androidx.compose.ui.res.painterResource
 import com.example.brewhome.R
 
 @Composable
-fun BottomAppBar(goDiscover: () -> Unit, goCategory: () -> Unit, goFavorite: () -> Unit) {
+fun BottomAppBar(goDiscover: () -> Unit,  goSearch: () -> Unit) {
     androidx.compose.material3.BottomAppBar(
         containerColor = MaterialTheme.colorScheme.tertiary,
         contentColor = MaterialTheme.colorScheme.primary,
         content = {
             Row(
                 modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.SpaceAround,
+                horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(onClick = goDiscover) {
@@ -29,15 +29,9 @@ fun BottomAppBar(goDiscover: () -> Unit, goCategory: () -> Unit, goFavorite: () 
                         contentDescription = null
                     )
                 };
-                IconButton(onClick = goCategory) {
+                IconButton(onClick = goSearch) {
                     Icon(
-                        painter = painterResource(id = R.drawable.category_24px),
-                        contentDescription = null
-                    )
-                };
-                IconButton(onClick = goFavorite) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.favorite_24px),
+                        painter = painterResource(id = R.drawable.search_24px),
                         contentDescription = null
                     )
                 };

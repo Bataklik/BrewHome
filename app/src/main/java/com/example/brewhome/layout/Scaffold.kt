@@ -1,9 +1,8 @@
-package com.example.brewhome.screens
+package com.example.brewhome.layout
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -13,35 +12,40 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.brewhome.components.BottomAppBar
-import com.example.brewhome.components.TopAppBar
 import com.example.brewhome.Destinations
+import com.example.brewhome.screens.BeerDetailScreen
+import com.example.brewhome.screens.DiscoverScreen
+import com.example.brewhome.screens.SearchScreen
+import com.example.brewhome.screens.SplashScreen
 import com.example.brewhome.viewmodel.BeerViewModel
 
 // https://dribbble.com/shots/11441772-Beer-App-Product-Explorations
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Scaffold(
     beerViewModel: BeerViewModel = viewModel(),
+    openSheet: suspend () -> Unit
 ) {
-    val navHostController = rememberNavController()
-    val currentBackStack by navHostController.currentBackStackEntryAsState()
+    val navController = rememberNavController()
+    val currentBackStack by navController.currentBackStackEntryAsState()
 
 
+    fun goBack() = navController.navigateUp()
     androidx.compose.material3.Scaffold(
         topBar = {
             if (currentBackStack?.destination?.route != Destinations.Splash.name) {
-                TopAppBar()
+                AppBar(
+                    openSheet = { openSheet() },
+                    previous = navController.previousBackStackEntry,
+                    currentBackStack = navController.currentBackStackEntry?.destination?.route
+                ) { goBack() }
             }
         },
         bottomBar = {
             if (currentBackStack?.destination?.route != Destinations.Splash.name) {
                 BottomAppBar({
-                    navHostController.navigate(Destinations.Discover.name)
+                    navController.navigate(Destinations.Discover.name)
                 }, {
-                    navHostController.navigate(Destinations.Category.name)
-                }, {
-                    navHostController.navigate(Destinations.Favorite.name)
+                    navController.navigate(Destinations.Search.name)
                 })
             }
         },
@@ -53,27 +57,34 @@ fun Scaffold(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             NavHost(
-                navController = navHostController,
+                navController = navController,
                 startDestination = Destinations.Splash.name
             ) {
+
                 composable(Destinations.Splash.name) {
-                    SplashScreen(navHostController)
+                    SplashScreen(navController)
                 }
                 composable(Destinations.Discover.name) {
-                    DiscoverScreen(beerViewModel,navController = navHostController)
+                    DiscoverScreen(
+                        beerViewModel,
+                        navController = navController,
+                    )
                 }
+                /*
                 composable(Destinations.Category.name) {
-                    CategoryScreen()
-                }
-                composable(Destinations.Favorite.name) {
+                                    CategoryScreen()
+                                }
+                 */
+                composable(Destinations.Search.name) {
                     SearchScreen()
                 }
+
                 composable("${Destinations.BeerDetail.name}/{beerId}") { backStackEntry ->
-                    val arguments = requireNotNull(backStackEntry.arguments)
-                    BeerDetailScreen(beerViewModel,beerId = 192)
+                    BeerDetailScreen(beerViewModel)
                 }
             }
         }
     }
 }
+
 

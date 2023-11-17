@@ -4,5 +4,6 @@ enum class Destinations {
     Splash,
     Discover,
     Category,
-    Favorite,
-    BeerDetail}
+    Search,
+    BeerDetail
+}

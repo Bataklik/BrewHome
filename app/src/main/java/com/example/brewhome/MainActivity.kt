@@ -3,31 +3,66 @@ package com.example.brewhome
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Surface
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.brewhome.screens.Scaffold
+import com.example.brewhome.layout.Scaffold
+import com.example.brewhome.screens.FavoritesSheet
 import com.example.brewhome.ui.theme.BrewHomeTheme
-import com.example.brewhome.viewmodel.BeerViewModel
+import kotlinx.coroutines.coroutineScope
+import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        val timber = Timber
+            .plant(Timber.DebugTree())
         super.onCreate(savedInstanceState)
         setContent {
-            //val viewModel: BeerViewModel = viewModel()
-            //val viewModel by BeerViewModel.uiState.collectAsState()
+            val sheetState = rememberStandardBottomSheetState(
+                initialValue = SheetValue.Hidden,
+                skipHiddenState = false,
+            )
+
+            suspend fun openSheet() = run {
+                coroutineScope {
+                    sheetState.expand()
+                }
+            }
+
+            suspend fun closeSheet() = run {
+                coroutineScope {
+                    sheetState.hide()
+                }
+            }
+
+            val scaffoldState = rememberBottomSheetScaffoldState(
+                bottomSheetState = sheetState,
+
+                )
+
             BrewHomeTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Scaffold()
+                    BottomSheetScaffold(
+                        sheetContent = { FavoritesSheet(closeSheet = { closeSheet() }) },
+                        sheetSwipeEnabled = false,
+                        scaffoldState = scaffoldState
+                    ) {
+                        Scaffold(openSheet = { openSheet() })
+                    }
                 }
             }
         }
+
+
     }
 }
-

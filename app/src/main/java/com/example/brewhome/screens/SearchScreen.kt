@@ -9,12 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun FavoriteScreen(modifier: Modifier = Modifier) {
+fun SearchScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.primary)
     ) {
-        Text(text = "Favorite")
+        Text(text = "Search")
     }
 }

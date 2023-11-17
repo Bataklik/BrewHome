@@ -1,8 +1,10 @@
-package com.example.brewhome.data
+package com.example.brewhome.network
+
+import com.example.brewhome.data.Beer
 
 sealed interface BeerApiState {
-    object Error : BeerApiState
-    object Loading : BeerApiState
-    data class success(val tasks: List<Beer>) : BeerApiState
+    object ErrorBeers : BeerApiState
+    object LoadingBeers : BeerApiState
+    data class SuccessBeers(val beers: List<Beer>) : BeerApiState
 }
 

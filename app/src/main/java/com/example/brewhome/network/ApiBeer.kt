@@ -1,30 +1,35 @@
-package com.example.brewhome.data
+package com.example.brewhome.network
 
-import com.google.gson.annotations.SerializedName
+import com.example.brewhome.data.Beer
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import timber.log.Timber
+
 
 @Serializable
 data class ApiBeer(
-    val id: Int?,
-    val name: String,
-    val tagline: String,
+    val id: Int,
+    val name: String?,
+    val tagline: String?,
+    @SerialName("first_brewed") val firstBrewed: String?,
+    @SerialName("image_url") val imageUrl: String?,
     val abv: Double,
-    @SerializedName(value = "image_url")
-    val imageUrl: String,
-    @SerializedName(value = "first_brewed")
-    val firstBrewed: String
 )
 
 
 public fun List<ApiBeer>.asDomainObjects(): List<Beer> {
+    Timber.i("Timber start")
     return map {
+
+
+        Timber.i("Timber: $it")
         Beer(
             id = it.id,
-            name = it.name,
-            tagline = it.tagline,
+            name = it.name ?: "",
+            tagline = it.tagline ?: "",
             abv = it.abv,
-            imageUrl = it.imageUrl,
-            firstBrewed = it.firstBrewed
+            imageUrl = it.imageUrl ?: "",
+            firstBrewed = it.firstBrewed ?: "",
         )
     }
 }
