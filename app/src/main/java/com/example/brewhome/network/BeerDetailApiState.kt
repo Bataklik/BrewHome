@@ -1,6 +1,6 @@
 package com.example.brewhome.network
 
-import com.example.brewhome.data.BeerDetail
+import com.example.brewhome.model.BeerDetail
 
 sealed interface BeerDetailApiState {
     object ErrorBeer : BeerDetailApiState

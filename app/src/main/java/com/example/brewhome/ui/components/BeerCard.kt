@@ -1,4 +1,4 @@
-package com.example.brewhome.components
+package com.example.brewhome.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,11 +33,12 @@ import com.example.brewhome.R
 
 @Composable
 fun BeerCard(
-    goTeDetail: () -> Unit,
+    goToDetail: (beerId: Int) -> Unit,
     imageUrl: String,
     name: String,
     tagline: String,
-    firstBrewed: String
+    firstBrewed: String,
+    beerId: Int
 ) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -48,7 +49,7 @@ fun BeerCard(
             .fillMaxWidth()
             .padding(horizontal = 5.dp, vertical = 5.dp)
             .clickable {
-                goTeDetail()
+                goToDetail(beerId)
             }
 
     ) {

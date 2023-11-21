@@ -1,4 +1,4 @@
-package com.example.brewhome.screens
+package com.example.brewhome.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -9,12 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun CategoryScreen(modifier: Modifier = Modifier) {
+fun SearchScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.primary)
     ) {
-        Text(text = "Category")
+        Text(text = "Search")
     }
 }

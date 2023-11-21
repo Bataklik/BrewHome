@@ -1,4 +1,4 @@
-package com.example.brewhome.screens
+package com.example.brewhome.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.brewhome.components.CloseButton
+import com.example.brewhome.ui.components.CloseButton
 
 @Composable
 fun FavoritesSheet(closeSheet: suspend () -> Unit) {

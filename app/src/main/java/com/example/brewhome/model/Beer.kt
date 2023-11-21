@@ -1,4 +1,4 @@
-package com.example.brewhome.data
+package com.example.brewhome.model
 
 data class Beer(
     val id: Int,

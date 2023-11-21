@@ -1,4 +1,4 @@
-package com.example.brewhome.screens
+package com.example.brewhome.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -27,16 +27,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.brewhome.R
-import com.example.brewhome.data.BeerDetail
+import com.example.brewhome.model.BeerDetail
 import com.example.brewhome.network.BeerDetailApiState
-import com.example.brewhome.viewmodel.BeerViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun BeerDetailScreen(beerViewModel: BeerViewModel) {
-
-    when (val beerDetailApiState = beerViewModel.beerDetailApiState) {
-
+fun BeerDetailScreen(
+    beerDetailApiState: BeerDetailApiState,
+    ) {
+    when (beerDetailApiState) {
         is BeerDetailApiState.ErrorBeer -> {
             BeerErrorScreen()
         }
@@ -136,6 +135,6 @@ fun BeerErrorScreen() {
 @Preview(showBackground = true)
 @Composable
 fun BeerDetailScreenPreview() {
-    BeerDetailScreen(BeerViewModel())
+    //BeerDetailScreen(BeerViewModel())
 }
 

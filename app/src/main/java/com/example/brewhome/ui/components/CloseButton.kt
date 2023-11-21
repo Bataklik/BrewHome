@@ -1,4 +1,4 @@
-package com.example.brewhome.components
+package com.example.brewhome.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

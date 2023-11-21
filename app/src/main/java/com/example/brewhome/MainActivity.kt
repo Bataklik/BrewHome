@@ -12,8 +12,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.brewhome.layout.Scaffold
-import com.example.brewhome.screens.FavoritesSheet
+import com.example.brewhome.ui.screens.FavoritesSheet
 import com.example.brewhome.ui.theme.BrewHomeTheme
 import kotlinx.coroutines.coroutineScope
 import timber.log.Timber
@@ -21,6 +22,7 @@ import timber.log.Timber
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         val timber = Timber
             .plant(Timber.DebugTree())
         super.onCreate(savedInstanceState)
@@ -44,8 +46,7 @@ class MainActivity : ComponentActivity() {
 
             val scaffoldState = rememberBottomSheetScaffoldState(
                 bottomSheetState = sheetState,
-
-                )
+            )
 
             BrewHomeTheme {
                 Surface(
@@ -62,7 +63,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
 
     }
 }

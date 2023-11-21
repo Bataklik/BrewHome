@@ -14,23 +14,6 @@ interface BeerApiService {
     @GET("beers/{beerId}")
     suspend fun getBeerById(@Path("beerId") beerId: Int): List<ApiBeerDetail>
 
-    @GET("beers")
+    @GET("beers ")
     suspend fun getBeers(): List<ApiBeer>
-}
-
-private val json: Json = Json {
-    ignoreUnknownKeys = true
-}
-
-private val retrofit: Retrofit = Retrofit.Builder()
-    .addConverterFactory(
-        json.asConverterFactory("application/json".toMediaType())
-    )
-    .baseUrl("https://api.punkapi.com/v2/")
-    .build()
-
-object BeerApi {
-    val beerService: BeerApiService by lazy {
-        retrofit.create(BeerApiService::class.java)
-    }
 }

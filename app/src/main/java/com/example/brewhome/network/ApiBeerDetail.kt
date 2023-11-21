@@ -1,7 +1,7 @@
 package com.example.brewhome.network
 
 
-import com.example.brewhome.data.BeerDetail
+import com.example.brewhome.model.BeerDetail
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -30,7 +30,7 @@ data class ApiBeerDetail(
 )
 
 
-public fun ApiBeerDetail.asDomainObject(): BeerDetail {
+fun ApiBeerDetail.asDomainObject(): BeerDetail {
     Timber.i("Timber start")
     return BeerDetail(
         id = this.id,

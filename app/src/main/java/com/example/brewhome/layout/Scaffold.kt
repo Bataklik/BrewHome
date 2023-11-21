@@ -1,8 +1,10 @@
 package com.example.brewhome.layout
 
+import Screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -13,41 +15,52 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.brewhome.Destinations
-import com.example.brewhome.screens.BeerDetailScreen
-import com.example.brewhome.screens.DiscoverScreen
-import com.example.brewhome.screens.SearchScreen
-import com.example.brewhome.screens.SplashScreen
+import com.example.brewhome.ui.screens.BeerDetailScreen
+import com.example.brewhome.ui.screens.DiscoverScreen
+import com.example.brewhome.ui.screens.SearchScreen
 import com.example.brewhome.viewmodel.BeerViewModel
 
 // https://dribbble.com/shots/11441772-Beer-App-Product-Explorations
 @Composable
 fun Scaffold(
-    beerViewModel: BeerViewModel = viewModel(),
+    beerViewModel: BeerViewModel = viewModel(factory = BeerViewModel.Factory),
     openSheet: suspend () -> Unit
 ) {
     val navController = rememberNavController()
-    val currentBackStack by navController.currentBackStackEntryAsState()
+    val canNavigateBack = navController.previousBackStackEntry != null
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentScreenTitle = when (backStackEntry?.destination?.route) {
+        Screen.Discover.route -> Screen.Discover.toString()
+        Screen.Search.route -> Screen.Search.toString()
+        Screen.BeerDetail().route -> Screen.BeerDetail().toString()
+        else -> Screen.Discover.toString()
+    }
 
+    val navigateUp: () -> Unit = { navController.navigateUp() }
+    val goToDetail = { beerId: Int ->
+        beerViewModel
+            .getBeerById(beerId)
+        navController
+            .navigate(Screen.BeerDetail(beerId).route)
+    }
+    val getBeerById = { beerId: Int -> beerViewModel.getBeerById(beerId) }
 
-    fun goBack() = navController.navigateUp()
-    androidx.compose.material3.Scaffold(
+    Scaffold(
         topBar = {
-            if (currentBackStack?.destination?.route != Destinations.Splash.name) {
-                AppBar(
-                    openSheet = { openSheet() },
-                    previous = navController.previousBackStackEntry,
-                    currentBackStack = navController.currentBackStackEntry?.destination?.route
-                ) { goBack() }
-            }
+            AppBar(
+                openSheet = { openSheet() },
+                navigateUp = navigateUp,
+                canNavigateBack = canNavigateBack,
+                currentScreenTitle = currentScreenTitle
+            )
+
         },
         bottomBar = {
-            if (currentBackStack?.destination?.route != Destinations.Splash.name) {
-                BottomAppBar({
-                    navController.navigate(Destinations.Discover.name)
-                }, {
-                    navController.navigate(Destinations.Search.name)
-                })
-            }
+            BottomAppBar({
+                navController.navigate(Destinations.Discover.name)
+            }, {
+                navController.navigate(Destinations.Search.name)
+            })
         },
 
         ) { innerPadding ->
@@ -58,29 +71,25 @@ fun Scaffold(
         ) {
             NavHost(
                 navController = navController,
-                startDestination = Destinations.Splash.name
+                startDestination = Destinations.Discover.name
             ) {
 
-                composable(Destinations.Splash.name) {
-                    SplashScreen(navController)
-                }
-                composable(Destinations.Discover.name) {
+                composable(Screen.Discover.route) {
                     DiscoverScreen(
-                        beerViewModel,
-                        navController = navController,
+                        beerApiState = beerViewModel.beerApiState,
+                        goToDetail = goToDetail
                     )
                 }
-                /*
-                composable(Destinations.Category.name) {
-                                    CategoryScreen()
-                                }
-                 */
-                composable(Destinations.Search.name) {
+
+                composable(Screen.Search.route) {
                     SearchScreen()
                 }
 
-                composable("${Destinations.BeerDetail.name}/{beerId}") { backStackEntry ->
-                    BeerDetailScreen(beerViewModel)
+                composable(Screen.BeerDetail().route) { backStackEntry ->
+                    val beerId = backStackEntry.arguments?.getInt("beerId") ?: -1
+                    BeerDetailScreen(
+                        beerDetailApiState = beerViewModel.beerDetailApiState,
+                    )
                 }
             }
         }

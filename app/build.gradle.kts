@@ -51,6 +51,9 @@ android {
 }
 
 dependencies {
+    // Splashscreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     // Mongodb

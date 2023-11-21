@@ -24,9 +24,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavBackStackEntry
 import com.example.brewhome.R
 import kotlinx.coroutines.launch
 
@@ -34,9 +34,9 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 fun AppBar(
     openSheet: suspend () -> Unit,
-    previous: NavBackStackEntry?,
-    currentBackStack: String?,
-    goBack: () -> Boolean,
+    navigateUp: () -> Unit,
+    canNavigateBack: Boolean,
+    currentScreenTitle: String,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -49,16 +49,14 @@ fun AppBar(
             titleContentColor = MaterialTheme.colorScheme.secondary
         ),
         navigationIcon = {
-            if (currentBackStack != null) {
-                if (previous != null && currentBackStack.contains("BeerDetail")) {
-                    AnimatedVisibility(visible = true, enter = fadeIn(), exit = fadeOut()) {
-                        IconButton(onClick = { goBack() }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.arrow_back_24px),
-                                contentDescription = null
-                            )
-                        };
-                    }
+            if (canNavigateBack) {
+                AnimatedVisibility(visible = true, enter = fadeIn(), exit = fadeOut()) {
+                    IconButton(onClick = { navigateUp() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.arrow_back_24px),
+                            contentDescription = null
+                        )
+                    };
                 }
             }
         },
@@ -97,7 +95,7 @@ fun AppBar(
                     modifier = Modifier.size(40.dp)
                 )
                 Text(
-                    "BrewHome",
+                    currentScreenTitle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )

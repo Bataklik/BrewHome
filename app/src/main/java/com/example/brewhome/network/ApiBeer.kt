@@ -1,6 +1,6 @@
 package com.example.brewhome.network
 
-import com.example.brewhome.data.Beer
+import com.example.brewhome.model.Beer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import timber.log.Timber
@@ -17,7 +17,7 @@ data class ApiBeer(
 )
 
 
-public fun List<ApiBeer>.asDomainObjects(): List<Beer> {
+fun List<ApiBeer>.asDomainObjects(): List<Beer> {
     Timber.i("Timber start")
     return map {
 
