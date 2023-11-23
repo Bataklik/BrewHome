@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 fun AppBar(
     openSheet: suspend () -> Unit,
     navigateUp: () -> Unit,
-    canNavigateBack: Boolean,
+    canNavigateBack: () -> Boolean,
     currentScreenTitle: String,
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -49,7 +49,7 @@ fun AppBar(
             titleContentColor = MaterialTheme.colorScheme.secondary
         ),
         navigationIcon = {
-            if (canNavigateBack) {
+            if (canNavigateBack()) {
                 AnimatedVisibility(visible = true, enter = fadeIn(), exit = fadeOut()) {
                     IconButton(onClick = { navigateUp() }) {
                         Icon(

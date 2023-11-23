@@ -1,11 +1,8 @@
 package com.example.brewhome.network
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
-import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface BeerApiService {
     @GET("beers/random")
@@ -14,6 +11,12 @@ interface BeerApiService {
     @GET("beers/{beerId}")
     suspend fun getBeerById(@Path("beerId") beerId: Int): List<ApiBeerDetail>
 
-    @GET("beers ")
+    @GET("beers")
     suspend fun getBeers(): List<ApiBeer>
+
+    @GET("beers")
+    suspend fun getBeers(
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int
+    ): List<ApiBeer>
 }

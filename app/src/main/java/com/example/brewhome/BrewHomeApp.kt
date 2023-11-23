@@ -1,4 +1,4 @@
-package com.example.brewhome.layout
+package com.example.brewhome
 
 import Screen
 import androidx.compose.foundation.layout.Arrangement
@@ -14,20 +14,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.brewhome.Destinations
+import com.example.brewhome.layout.AppBar
+import com.example.brewhome.layout.BottomAppBar
 import com.example.brewhome.ui.screens.BeerDetailScreen
 import com.example.brewhome.ui.screens.DiscoverScreen
 import com.example.brewhome.ui.screens.SearchScreen
 import com.example.brewhome.viewmodel.BeerViewModel
 
-// https://dribbble.com/shots/11441772-Beer-App-Product-Explorations
 @Composable
-fun Scaffold(
+fun BrewHomeApp(
     beerViewModel: BeerViewModel = viewModel(factory = BeerViewModel.Factory),
     openSheet: suspend () -> Unit
 ) {
     val navController = rememberNavController()
-    val canNavigateBack = navController.previousBackStackEntry != null
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreenTitle = when (backStackEntry?.destination?.route) {
         Screen.Discover.route -> Screen.Discover.toString()
@@ -35,8 +34,40 @@ fun Scaffold(
         Screen.BeerDetail().route -> Screen.BeerDetail().toString()
         else -> Screen.Discover.toString()
     }
+    val canNavigateBack = {
+        print(navController.previousBackStackEntry)
+        print(navController.currentBackStack)
+        navController.previousBackStackEntry != null
+    }
 
     val navigateUp: () -> Unit = { navController.navigateUp() }
+
+    /***
+     * Navigeer naar het "Discover"-scherm en
+     * verwijder alle tussenliggende schermen,
+     * inclusief "Search", uit de backstack.
+     */
+    val goToDiscover = {
+
+        navController.navigate(Screen.Discover.route) {
+            popUpTo(Screen.Search.route) {
+                inclusive = true
+            }
+        }
+    }
+
+    /***
+     *  Navigeer naar het "Search"-scherm en
+     *  verwijder alle tussenliggende schermen,
+     *  inclusief "Discover", uit de backstack.
+     */
+    val goToSearch = {
+        navController.navigate(Screen.Search.route) {
+            popUpTo(Screen.Discover.route) {
+                inclusive = true
+            }
+        }
+    }
     val goToDetail = { beerId: Int ->
         beerViewModel
             .getBeerById(beerId)
@@ -57,9 +88,9 @@ fun Scaffold(
         },
         bottomBar = {
             BottomAppBar({
-                navController.navigate(Destinations.Discover.name)
+                goToDiscover()
             }, {
-                navController.navigate(Destinations.Search.name)
+                goToSearch()
             })
         },
 
@@ -71,7 +102,7 @@ fun Scaffold(
         ) {
             NavHost(
                 navController = navController,
-                startDestination = Destinations.Discover.name
+                startDestination = Screen.Discover.route
             ) {
 
                 composable(Screen.Discover.route) {
@@ -80,16 +111,14 @@ fun Scaffold(
                         goToDetail = goToDetail
                     )
                 }
-
-                composable(Screen.Search.route) {
-                    SearchScreen()
-                }
-
                 composable(Screen.BeerDetail().route) { backStackEntry ->
                     val beerId = backStackEntry.arguments?.getInt("beerId") ?: -1
                     BeerDetailScreen(
                         beerDetailApiState = beerViewModel.beerDetailApiState,
                     )
+                }
+                composable(Screen.Search.route) {
+                    SearchScreen()
                 }
             }
         }

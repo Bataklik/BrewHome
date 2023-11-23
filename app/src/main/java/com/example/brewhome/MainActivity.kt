@@ -13,7 +13,6 @@ import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.brewhome.layout.Scaffold
 import com.example.brewhome.ui.screens.FavoritesSheet
 import com.example.brewhome.ui.theme.BrewHomeTheme
 import kotlinx.coroutines.coroutineScope
@@ -32,15 +31,20 @@ class MainActivity : ComponentActivity() {
                 skipHiddenState = false,
             )
 
-            suspend fun openSheet() = run {
-                coroutineScope {
-                    sheetState.expand()
+
+            val openSheet = suspend {
+                run {
+                    coroutineScope {
+                        sheetState.expand()
+                    }
                 }
             }
 
-            suspend fun closeSheet() = run {
-                coroutineScope {
-                    sheetState.hide()
+            val closeSheet = suspend {
+                run {
+                    coroutineScope {
+                        sheetState.hide()
+                    }
                 }
             }
 
@@ -58,7 +62,7 @@ class MainActivity : ComponentActivity() {
                         sheetSwipeEnabled = false,
                         scaffoldState = scaffoldState
                     ) {
-                        Scaffold(openSheet = { openSheet() })
+                        BrewHomeApp(openSheet = { openSheet() })
                     }
                 }
             }
