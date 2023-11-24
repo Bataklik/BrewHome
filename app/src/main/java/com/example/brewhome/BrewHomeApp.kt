@@ -48,7 +48,6 @@ fun BrewHomeApp(
      * inclusief "Search", uit de backstack.
      */
     val goToDiscover = {
-
         navController.navigate(Screen.Discover.route) {
             popUpTo(Screen.Search.route) {
                 inclusive = true
@@ -89,9 +88,9 @@ fun BrewHomeApp(
         bottomBar = {
             BottomAppBar({
                 goToDiscover()
-            }, {
+            }) {
                 goToSearch()
-            })
+            }
         },
 
         ) { innerPadding ->

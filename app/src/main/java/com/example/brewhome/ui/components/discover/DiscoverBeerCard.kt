@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.components
+package com.example.brewhome.ui.components.discover
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,7 +32,7 @@ import coil.compose.AsyncImage
 import com.example.brewhome.R
 
 @Composable
-fun BeerCard(
+fun DiscoverBeerCard(
     goToDetail: (beerId: Int) -> Unit,
     imageUrl: String,
     name: String,

@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.components
+package com.example.brewhome.ui.components.favorites
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,7 +18,7 @@ import com.example.brewhome.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun CloseButton(
+fun FavoritesCloseButton(
     onClose: suspend () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()

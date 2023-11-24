@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SheetValue
@@ -13,7 +12,7 @@ import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.brewhome.ui.screens.FavoritesSheet
+import com.example.brewhome.layout.BottomSheet
 import com.example.brewhome.ui.theme.BrewHomeTheme
 import kotlinx.coroutines.coroutineScope
 import timber.log.Timber
@@ -21,8 +20,8 @@ import timber.log.Timber
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
-        val timber = Timber
+        installSplashScreen()
+        Timber
             .plant(Timber.DebugTree())
         super.onCreate(savedInstanceState)
         setContent {
@@ -30,8 +29,6 @@ class MainActivity : ComponentActivity() {
                 initialValue = SheetValue.Hidden,
                 skipHiddenState = false,
             )
-
-
             val openSheet = suspend {
                 run {
                     coroutineScope {
@@ -39,7 +36,6 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-
             val closeSheet = suspend {
                 run {
                     coroutineScope {
@@ -47,7 +43,6 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-
             val scaffoldState = rememberBottomSheetScaffoldState(
                 bottomSheetState = sheetState,
             )
@@ -57,12 +52,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BottomSheetScaffold(
-                        sheetContent = { FavoritesSheet(closeSheet = { closeSheet() }) },
-                        sheetSwipeEnabled = false,
-                        scaffoldState = scaffoldState
-                    ) {
-                        BrewHomeApp(openSheet = { openSheet() })
+                    BottomSheet(closeSheet, scaffoldState) {
+                        BrewHomeApp(openSheet = openSheet)
                     }
                 }
             }

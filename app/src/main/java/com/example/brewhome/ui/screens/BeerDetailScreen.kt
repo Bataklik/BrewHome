@@ -62,29 +62,14 @@ private fun BeerSuccessScreen(currentBeer: BeerDetail) {
                 .padding(horizontal = 7.dp,vertical=10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-
-            item {
+            items(1) {
                 BeerTitle(currentBeer.name)
-            }
-            item {
                 BeerTagline(currentBeer.tagline)
-            }
-            item {
                 BeerFirstBrew(currentBeer.firstBrewed)
-            }
-            item {
                 BeerAbv(currentBeer.abv)
-            }
-            item {
                 BeerEbc(currentBeer.ebc)
-            }
-            item {
                 BeerAcidity(currentBeer.ph)
-            }
-            item {
                 BeerSRM(currentBeer.srm)
-            }
-            item {
                 BeerDescription(currentBeer.description)
             }
         }

@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.brewhome.network.BeerApiState
-import com.example.brewhome.ui.components.BeerCard
 
 @Composable
 fun DiscoverBeerList(
@@ -44,7 +43,7 @@ fun DiscoverBeerList(
 
             is BeerApiState.SuccessBeers -> {
                 items(beerApiState.beers) { beer ->
-                    BeerCard(
+                    DiscoverBeerCard(
                         beerId = beer.id,
                         name = beer.name,
                         tagline = beer.tagline,
