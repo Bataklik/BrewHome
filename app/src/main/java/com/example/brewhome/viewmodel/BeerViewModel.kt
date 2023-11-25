@@ -65,7 +65,7 @@ class BeerViewModel(private val beerRepository: BeerRepository) : ViewModel() {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[APPLICATION_KEY]) as BeerApplication
-                val beerRepository = application.beerContainer.beerRepository
+                val beerRepository = application.container.beerRepository
                 BeerViewModel(beerRepository)
             }
         }
