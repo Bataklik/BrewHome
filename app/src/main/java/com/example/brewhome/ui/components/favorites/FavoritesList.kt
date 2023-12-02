@@ -12,19 +12,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.brewhome.model.Beer
 
 @Composable
-fun FavoritesList(listState: LazyListState) {
+fun FavoritesList(
+    listState: LazyListState,
+    favoriteBeers: List<Beer>,
+    deleteFromFavoriteBeers: (Int) -> Unit,
+    isBeerInFavorites: (Int) -> Boolean
+) {
     LazyColumn(
         modifier = Modifier
-            .padding(horizontal = 15.dp)
+            .padding(horizontal = 15.dp, vertical = 10.dp)
             .fillMaxWidth()
             .fillMaxHeight(),
-        verticalArrangement = Arrangement.spacedBy(5.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         state = listState
     ) {
-        items(items = listOf("Stella", "Heineken")) { beer ->
-            FavoritesBeerItem(beer = beer)
+        items(items = favoriteBeers) { beer ->
+            val isFavorite = isBeerInFavorites(beer.id)
+            FavoritesBeerItem(
+                beer = beer,
+                isFavorite = isFavorite,
+                deleteFromFavoriteBeers = deleteFromFavoriteBeers
+            )
         }
     }
 }
@@ -33,6 +44,11 @@ fun FavoritesList(listState: LazyListState) {
 @Composable
 fun FavoritesListPreview() {
     val listState = rememberLazyListState()
-    FavoritesList(listState = listState)
+    FavoritesList(
+        listState = listState,
+        favoriteBeers = listOf(),
+        deleteFromFavoriteBeers = { },
+        isBeerInFavorites = { true }
+    )
 }
 

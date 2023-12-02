@@ -24,7 +24,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.brewhome.R
@@ -39,7 +38,6 @@ fun AppBar(
     currentScreenTitle: String,
 ) {
     val coroutineScope = rememberCoroutineScope()
-
     TopAppBar(
         modifier = Modifier
             .height(70.dp)

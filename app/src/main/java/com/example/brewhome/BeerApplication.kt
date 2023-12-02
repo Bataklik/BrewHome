@@ -9,6 +9,6 @@ class BeerApplication : Application() {
     lateinit var container: BeerContainer
     override fun onCreate() {
         super.onCreate()
-        container = DefaultBeerContainer()
+        container = DefaultBeerContainer(applicationContext)
     }
 }

@@ -11,18 +11,34 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.brewhome.BeerApplication
 import com.example.brewhome.data.BeerRepository
+import com.example.brewhome.data.FavoriteBeerRepository
+import com.example.brewhome.data.database.asDbFavoriteBeer
+import com.example.brewhome.model.Beer
+import com.example.brewhome.model.BeerDetail
+import com.example.brewhome.model.asBeer
 import com.example.brewhome.network.BeerApiState
 import com.example.brewhome.network.BeerDetailApiState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
 
-class BeerViewModel(private val beerRepository: BeerRepository) : ViewModel() {
-    private val _beersState = MutableStateFlow(BeerViewModelState(emptyList(), null, listOf()))
-    val uiState: StateFlow<BeerViewModelState> = _beersState.asStateFlow()
+class BeerViewModel(
+    private val beerRepository: BeerRepository,
+    private val favoriteBeerRepository: FavoriteBeerRepository
+) : ViewModel() {
+    private val _beersState =
+        MutableStateFlow(BeerViewModelState(emptyList(), null, listOf()))
+    val uiState: StateFlow<BeerViewModelState> = _beersState
+        .asStateFlow()
+    lateinit var uiListState: StateFlow<List<Beer>>
 
     var beerApiState: BeerApiState by mutableStateOf(BeerApiState.LoadingBeers)
         private set
@@ -36,10 +52,20 @@ class BeerViewModel(private val beerRepository: BeerRepository) : ViewModel() {
     private fun getApiBeers() {
         viewModelScope.launch {
             beerApiState = try {
+                uiListState = favoriteBeerRepository
+                    .getFavoriteBeers()
+                    .stateIn(
+                        scope = viewModelScope,
+                        started = SharingStarted.WhileSubscribed(5_000L),
+                        initialValue = listOf()
+                    )
+                print(uiListState.value)
+
+                Timber.i("Favorite Beers: $uiListState")
+
                 val randomPage = (1..10).random()
                 val resultBeers = beerRepository
                     .getBeers(randomPage, 20)
-
                 BeerApiState.SuccessBeers(resultBeers)
             } catch (e: IOException) {
                 Timber.i("Failed to use api: $e")
@@ -53,6 +79,7 @@ class BeerViewModel(private val beerRepository: BeerRepository) : ViewModel() {
             beerDetailApiState = try {
                 val apiBeer = beerRepository
                     .getBeerById(beerId)
+                setCurrentBeer(apiBeer)
                 BeerDetailApiState.SuccessBeer(apiBeer)
             } catch (e: IOException) {
                 Timber.i("Failed to use api: $e")
@@ -61,12 +88,57 @@ class BeerViewModel(private val beerRepository: BeerRepository) : ViewModel() {
         }
     }
 
+    private fun setCurrentBeer(beer: BeerDetail) {
+        _beersState.update {
+            it.copy(currentBeerById = beer)
+        }
+    }
+
+    fun addBeerToFavorites() {
+        val beer = _beersState.value.currentBeerById
+        if (beer != null) {
+            viewModelScope.launch {
+                favoriteBeerRepository
+                    .insertFavoriteBeer(beer.asBeer())
+            }
+        }
+    }
+
+    fun deleteFromFavoriteBeers(id: Int) {
+        viewModelScope.launch {
+            val toDeleteBeer = beerRepository
+                .getBeerById(id)
+                .asDbFavoriteBeer()
+
+            favoriteBeerRepository
+                .deletefavoriteBeer(toDeleteBeer)
+        }
+
+    }
+
+    fun getFavoriteBeer() {
+        val beer = _beersState.value.currentBeerById
+        if (beer != null) {
+            viewModelScope.launch {
+                favoriteBeerRepository
+                    .getFavoriteBeerById(beer.id)
+            }
+        }
+    }
+
+    suspend fun isBeerInFavorites(routeId: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            favoriteBeerRepository.isBeerInFavorites(routeId)
+        }
+    }
+
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[APPLICATION_KEY]) as BeerApplication
                 val beerRepository = application.container.beerRepository
-                BeerViewModel(beerRepository)
+                val favoriteBeerRepository = application.container.favoriteBeerRepository
+                BeerViewModel(beerRepository, favoriteBeerRepository)
             }
         }
     }

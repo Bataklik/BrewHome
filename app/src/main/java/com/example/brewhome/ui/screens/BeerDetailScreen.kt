@@ -1,6 +1,5 @@
 package com.example.brewhome.ui.screens
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -24,10 +23,11 @@ import com.example.brewhome.ui.components.beerDetail.BeerSRM
 import com.example.brewhome.ui.components.beerDetail.BeerTagline
 import com.example.brewhome.ui.components.beerDetail.BeerTitle
 
-@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun BeerDetailScreen(
     beerDetailApiState: BeerDetailApiState,
+    addBeerToFavorites: () -> Unit,
+    isBeerInFavorites: (Int) -> Boolean,
 ) {
     when (beerDetailApiState) {
         is BeerDetailApiState.ErrorBeer -> {
@@ -40,7 +40,11 @@ fun BeerDetailScreen(
 
         is BeerDetailApiState.SuccessBeer -> {
             val currentBeer = beerDetailApiState.beer
-            BeerSuccessScreen(currentBeer)
+            BeerSuccessScreen(
+                currentBeer = currentBeer,
+                addBeerToFavorites = addBeerToFavorites,
+                isBeerInFavorites = isBeerInFavorites
+            )
         }
     }
 }
@@ -51,7 +55,14 @@ private fun BeerLoadingScreen() {
 }
 
 @Composable
-private fun BeerSuccessScreen(currentBeer: BeerDetail) {
+private fun BeerSuccessScreen(
+    currentBeer: BeerDetail,
+    addBeerToFavorites: () -> Unit,
+    isBeerInFavorites: (Int) -> Boolean,
+) {
+
+    val beerFavorite = { isBeerInFavorites(currentBeer.id) }
+
     Column(
         modifier = Modifier.fillMaxHeight(),
     ) {
@@ -59,11 +70,11 @@ private fun BeerSuccessScreen(currentBeer: BeerDetail) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 7.dp,vertical=10.dp),
+                .padding(horizontal = 7.dp, vertical = 10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(1) {
-                BeerTitle(currentBeer.name)
+                BeerTitle(currentBeer.name, addBeerToFavorites, beerFavorite)
                 BeerTagline(currentBeer.tagline)
                 BeerFirstBrew(currentBeer.firstBrewed)
                 BeerAbv(currentBeer.abv)

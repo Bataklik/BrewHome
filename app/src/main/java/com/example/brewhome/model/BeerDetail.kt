@@ -1,5 +1,7 @@
 package com.example.brewhome.model
 
+import com.example.brewhome.data.database.DbFavoriteBeer
+
 data class BeerDetail(
     val id: Int,
     val name: String,
@@ -18,4 +20,13 @@ data class BeerDetail(
     val foodPairing: List<String>,
     val brewersTips: String,
     val contributedBy: String
+)
+
+fun BeerDetail.asBeer(): Beer = Beer(
+    id = id,
+    name = name,
+    tagline = tagline,
+    imageUrl = imageUrl,
+    firstBrewed = firstBrewed,
+    abv = abv
 )
