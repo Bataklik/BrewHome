@@ -9,7 +9,7 @@ HomeBrew is een prachtige Android-applicatie gebouwd met Jetpack Compose waarmee
 - **Favorietenlijst**: Maak en beheer je eigen lijst met favoriete bieren met slechts één tik.
 
 ## Screenshots
-*Homescherm - Ontdek een aan bieren.*
+*Homescherm - Ontdekken van bieren.*
 
 ![image](https://github.com/Bataklik/BrewHome/assets/60544395/3e7989f3-3fc0-4b74-96f0-ab4cf1ca794e)
 
