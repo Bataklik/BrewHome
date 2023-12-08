@@ -1,9 +1,8 @@
-package com.example.brewhome.fake
+package com.example.brewhome.fake.data
 
 import com.example.brewhome.model.Beer
 import com.example.brewhome.network.ApiBeer
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking

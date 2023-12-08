@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -34,6 +35,7 @@ import kotlinx.coroutines.runBlocking
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BrewHomeApp(
+    navController: NavHostController = rememberNavController(),
     beerViewModel: BeerViewModel = viewModel(factory = BeerViewModel.Factory),
 ) {
     // region Behandeling van BottomSheet
@@ -61,7 +63,6 @@ fun BrewHomeApp(
     // endregion
 
     // region Behandeling van Navigation
-    val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreenTitle = when (backStackEntry?.destination?.route) {
         Screen.Discover.route -> Screen.Discover.toString()
@@ -152,11 +153,10 @@ fun BrewHomeApp(
                 )
             },
             bottomBar = {
-                BottomAppBar({
-                    goToDiscover()
-                }) {
-                    goToSearch()
-                }
+                BottomAppBar(
+                    goDiscover = goToDiscover,
+                    goSearch = goToSearch
+                )
             },
 
             ) { innerPadding ->

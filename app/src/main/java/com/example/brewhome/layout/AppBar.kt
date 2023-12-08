@@ -24,6 +24,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.brewhome.R
@@ -32,6 +34,7 @@ import kotlinx.coroutines.launch
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun AppBar(
+    modifier:Modifier = Modifier,
     openSheet: suspend () -> Unit,
     navigateUp: () -> Unit,
     canNavigateBack: () -> Boolean,
@@ -39,7 +42,7 @@ fun AppBar(
 ) {
     val coroutineScope = rememberCoroutineScope()
     TopAppBar(
-        modifier = Modifier
+        modifier = modifier
             .height(70.dp)
             .padding(vertical = 5.dp),
         colors = TopAppBarDefaults.mediumTopAppBarColors(
@@ -66,12 +69,12 @@ fun AppBar(
             }) {
                 Row(verticalAlignment = CenterVertically) {
                     Icon(
-                        modifier = Modifier.size(28.dp),
+                        modifier = modifier.size(28.dp),
                         tint = MaterialTheme.colorScheme.tertiary,
                         painter = painterResource(id = R.drawable.favorite_24px),
                         contentDescription = null
                     )
-                    Spacer(modifier = Modifier.width(width = 4.dp))
+                    Spacer(modifier = modifier.width(width = 4.dp))
                     Text(
                         text = "Favorites",
                         color = MaterialTheme.colorScheme.tertiary,
@@ -90,12 +93,14 @@ fun AppBar(
                 Image(
                     painter = painterResource(id = R.drawable.homebrew),
                     contentDescription = "BrewHome Logo",
-                    modifier = Modifier.size(40.dp)
+                    modifier = modifier.size(40.dp)
                 )
                 Text(
                     currentScreenTitle,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = modifier
+                        .semantics { contentDescription="txtCurrentScreenTitle" }
                 )
             }
         },

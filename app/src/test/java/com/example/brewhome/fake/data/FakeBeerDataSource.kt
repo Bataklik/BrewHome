@@ -1,7 +1,8 @@
-package com.example.brewhome.fake
+package com.example.brewhome.fake.data
 
 import com.example.brewhome.model.BeerDetail
 import com.example.brewhome.network.ApiBeer
+import com.example.brewhome.network.ApiBeerDetail
 
 object FakeBeerDataSource {
     const val beerIdOne = 1
@@ -38,7 +39,7 @@ object FakeBeerDataSource {
         )
     )
 
-    val beerDetail = BeerDetail(
+    val beerDetail = ApiBeerDetail(
         id = beerIdOne,
         name = beerNameOne,
         tagline = beerTaglineOne,

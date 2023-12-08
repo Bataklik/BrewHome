@@ -10,16 +10,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import com.example.brewhome.R
 
 @Composable
-fun BottomAppBar(goDiscover: () -> Unit,  goSearch: () -> Unit) {
+fun BottomAppBar(modifier: Modifier = Modifier, goDiscover: () -> Unit, goSearch: () -> Unit) {
     androidx.compose.material3.BottomAppBar(
         containerColor = MaterialTheme.colorScheme.tertiary,
         contentColor = MaterialTheme.colorScheme.primary,
         content = {
             Row(
-                modifier = Modifier.fillMaxSize(),
+                modifier = modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -29,7 +31,10 @@ fun BottomAppBar(goDiscover: () -> Unit,  goSearch: () -> Unit) {
                         contentDescription = null
                     )
                 };
-                IconButton(onClick = goSearch) {
+                IconButton(onClick = goSearch,
+                    modifier = modifier.semantics {
+                        contentDescription="btnGoSearch"
+                    }) {
                     Icon(
                         painter = painterResource(id = R.drawable.search_24px),
                         contentDescription = null

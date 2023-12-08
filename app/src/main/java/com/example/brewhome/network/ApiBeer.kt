@@ -16,7 +16,7 @@ data class ApiBeer(
     val abv: Double,
 )
 
-fun ApiBeer.asDomainObject() = Beer(
+fun ApiBeer.asBeerObject() = Beer(
     id = id,
     name = name,
     tagline = tagline,
@@ -26,7 +26,7 @@ fun ApiBeer.asDomainObject() = Beer(
 )
 
 
-fun List<ApiBeer>.asDomainObjects(): List<Beer> {
+fun List<ApiBeer>.asBeerObjects(): List<Beer> {
     Timber.i("Timber start")
     return map {
         Timber.i("Timber: $it")

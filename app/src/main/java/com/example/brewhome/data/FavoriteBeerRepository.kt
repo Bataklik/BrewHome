@@ -7,18 +7,17 @@ import com.example.brewhome.data.database.asDomainFavoriteBeers
 import com.example.brewhome.model.Beer
 import com.example.brewhome.model.asDbFavoriteBeer
 import com.example.brewhome.network.BeerApiService
-import com.example.brewhome.network.asDomainObject
+import com.example.brewhome.network.asBeerObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 
 interface FavoriteBeerRepository {
     suspend fun insertFavoriteBeer(favBeer: Beer)
     suspend fun deletefavoriteBeer(favBeer: DbFavoriteBeer)
     fun getFavoriteBeers(): Flow<List<Beer>>
-    fun getFavoriteBeerById(routeId: Int): Beer
-    fun isBeerInFavorites(routeId:Int):Boolean
+    fun getFavoriteBeerById(beerId: Int): Beer?
+    fun isBeerInFavorites(beerId:Int):Boolean
 }
 
 class CachingFavoriteBeerRepository(
@@ -44,22 +43,22 @@ class CachingFavoriteBeerRepository(
                 it.asDomainFavoriteBeers() }
     }
 
-    override fun getFavoriteBeerById(routeId: Int): Beer {
+    override fun getFavoriteBeerById(beerId: Int): Beer {
         return favoriteBeerDao
-            .getFavoriteBeerById(routeId)
+            .getFavoriteBeerById(beerId)
             .asDomainBeer()
     }
 
-    override fun isBeerInFavorites(routeId: Int): Boolean {
+    override fun isBeerInFavorites(beerId: Int): Boolean {
         return favoriteBeerDao
-            .isBeerInFavorites(routeId)
+            .isBeerInFavorites(beerId)
     }
 
     private suspend fun refresh() {
         beerApiService
             .getBeers()
             .forEach {
-                favoriteBeerDao.insertFavoriteBeer(it.asDomainObject().asDbFavoriteBeer())
+                favoriteBeerDao.insertFavoriteBeer(it.asBeerObject().asDbFavoriteBeer())
             }
     }
 }

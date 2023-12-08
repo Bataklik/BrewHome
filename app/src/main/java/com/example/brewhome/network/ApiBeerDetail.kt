@@ -30,7 +30,7 @@ data class ApiBeerDetail(
 )
 
 
-fun ApiBeerDetail.asDomainObject(): BeerDetail {
+fun ApiBeerDetail.asBeerObject(): BeerDetail {
     Timber.i("Timber start")
     return BeerDetail(
         id = this.id,
