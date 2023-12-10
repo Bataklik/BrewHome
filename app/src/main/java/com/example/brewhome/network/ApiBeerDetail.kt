@@ -7,7 +7,28 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import timber.log.Timber
 
-
+/**
+ * Een vereenvoudigde weergave van een bier opgehaald van de API.
+ *
+ * @property id De unieke identificatie voor dit bier.
+ * @property name De naam van dit bier.
+ * @property tagline De tagline geassocieerd met dit bier.
+ * @property firstBrewed De datum waarop dit bier voor het eerst is gebrouwen.
+ * @property description De beschrijving van dit bier.
+ * @property imageUrl De URL van de afbeelding die dit bier voorstelt.
+ * @property abv Het alcoholpercentage van dit bier.
+ * @property ibu De International Bitterness Units (IBU) van dit bier.
+ * @property targetFg Het doel eind-dichtheid van dit bier.
+ * @property targetOg Het doel begin-dichtheid van dit bier.
+ * @property ebc De European Brewery Convention (EBC) kleur van dit bier.
+ * @property srm De Standard Reference Method (SRM) kleur van dit bier.
+ * @property ph De zuurgraad (pH) van dit bier.
+ * @property attenuationLevel Het attenuatieniveau van dit bier.
+ * @property foodPairing Een lijst van voedselcombinaties die goed samengaan met dit bier.
+ * @property brewersTips Tips van de brouwer voor dit bier.
+ * @property contributedBy Bijdrage van de gebruiker aan dit bier.
+ * @constructor Creëert een [ApiBeerDetail] met de gespecificeerde eigenschappen.
+ */
 @Serializable
 data class ApiBeerDetail(
     val id: Int,
@@ -29,8 +50,12 @@ data class ApiBeerDetail(
     @Transient @SerialName("contributed_by") val contributedBy: String? = ""
 )
 
-
-fun ApiBeerDetail.asBeerObject(): BeerDetail {
+/**
+ * Converteert een [ApiBeerDetail] object naar een [BeerDetail] object.
+ * @return Het geconverteerde [BeerDetail] object.
+ */
+fun ApiBeerDetail
+    .asBeerObject(): BeerDetail {
     Timber.i("Timber start")
     return BeerDetail(
         id = this.id,

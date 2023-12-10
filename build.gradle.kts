@@ -3,4 +3,17 @@ plugins {
     id("com.android.application") version "8.1.2" apply false
     id("org.jetbrains.kotlin.android") version "1.8.10" apply false
     id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false
+    id("org.jetbrains.dokka") version "1.9.10"
+}
+
+subprojects {
+    apply(plugin = "org.jetbrains.dokka")
+    tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
+        doFirst {
+            println("Running Dokka task for $name")
+        }
+        doLast {
+            println("Dokka Output Directory for $name: $outputDirectory")
+        }
+    }
 }
