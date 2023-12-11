@@ -6,59 +6,107 @@ import com.example.brewhome.data.database.asDomainBeer
 import com.example.brewhome.data.database.asDomainFavoriteBeers
 import com.example.brewhome.model.Beer
 import com.example.brewhome.model.asDbFavoriteBeer
-import com.example.brewhome.network.BeerApiService
-import com.example.brewhome.network.asBeerObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 
+/**
+ * Repository-interface voor het beheren van favoriete bieren in de lokale database met behulp van Room.
+ * Biedt methoden voor het toevoegen, verwijderen en ophalen van favoriete bieren, evenals controle of een bier in de favorietenlijst staat.
+ */
 interface FavoriteBeerRepository {
+    /**
+     * Voeg een bier toe aan de lijst met favoriete bieren.
+     * @param favBeer Het [Beer]-object dat moet worden toegevoegd aan de favorietenlijst.
+     */
     suspend fun insertFavoriteBeer(favBeer: Beer)
+
+    /**
+     * Verwijder een favoriet bier uit de lijst met favoriete bieren.
+     * @param favBeer Het [DbFavoriteBeer]-object dat moet worden verwijderd uit de favorietenlijst.
+     */
     suspend fun deletefavoriteBeer(favBeer: DbFavoriteBeer)
+
+    /**
+     * Haal een stroom van alle favoriete bieren op.
+     * @return Een [Flow] van lijsten met [Beer]-objecten die de favoriete bieren vertegenwoordigen.
+     */
     fun getFavoriteBeers(): Flow<List<Beer>>
+
+    /**
+     * Haal een favoriet bier op aan de hand van het opgegeven bier-ID.
+     * @param beerId Het unieke ID van het favoriete bier.
+     * @return Een [Beer]-object dat het favoriete bier vertegenwoordigt, of null als het niet gevonden is.
+     */
     fun getFavoriteBeerById(beerId: Int): Beer?
-    fun isBeerInFavorites(beerId:Int):Boolean
+
+    /**
+     * Controleer of een bier zich in de lijst met favoriete bieren bevindt.
+     * @param beerId Het unieke ID van het bier.
+     * @return true als het bier in de favorietenlijst staat, anders false.
+     */
+    fun isBeerInFavorites(beerId: Int): Boolean
 }
 
+/**
+ * Implementatie van [FavoriteBeerRepository] die lokale database-interacties afhandelt met Room en indien nodig de Beer API raadpleegt.
+ * @property favoriteBeerDao DAO voor interactie met de lokale database.
+ */
 class CachingFavoriteBeerRepository(
     private val favoriteBeerDao: FavoriteBeerDao,
-    private val beerApiService: BeerApiService
 ) : FavoriteBeerRepository {
+
+    /**
+     * Voeg een bier toe aan de lijst met favoriete bieren.
+     * @param favBeer Het [Beer]-object dat moet worden toegevoegd aan de favorietenlijst.
+     */
     override suspend fun insertFavoriteBeer(favBeer: Beer) {
         favoriteBeerDao
             .insertFavoriteBeer(favBeer.asDbFavoriteBeer())
     }
 
+    /**
+     * Verwijder een favoriet bier uit de lijst met favoriete bieren.
+     * @param favBeer Het [DbFavoriteBeer]-object dat moet worden verwijderd uit de favorietenlijst.
+     */
     override suspend fun deletefavoriteBeer(favBeer: DbFavoriteBeer) {
         favoriteBeerDao
             .deleteFavoriteBeer(favBeer)
     }
 
+    /**
+     * Haal een stroom van alle favoriete bieren op.
+     * @return Een [Flow] van lijsten met [Beer]-objecten die de favoriete bieren vertegenwoordigen.
+     */
     override fun getFavoriteBeers(): Flow<List<Beer>> {
         return favoriteBeerDao
             .getFavoriteBeers()
             .map {
                 val transformedList = it.asDomainFavoriteBeers()
                 Timber.d("Transformed List: $transformedList")
-                it.asDomainFavoriteBeers() }
+                it.asDomainFavoriteBeers()
+            }
     }
 
+    /**
+     * Haal een favoriet bier op aan de hand van het opgegeven bier-ID.
+     * @param beerId Het unieke ID van het favoriete bier.
+     * @return Een [Beer]-object dat het favoriete bier vertegenwoordigt, of null als het niet gevonden is.
+     */
     override fun getFavoriteBeerById(beerId: Int): Beer {
         return favoriteBeerDao
             .getFavoriteBeerById(beerId)
             .asDomainBeer()
     }
 
+    /**
+     * Controleer of een bier zich in de lijst met favoriete bieren bevindt.
+     * @param beerId Het unieke ID van het bier.
+     * @return true als het bier in de favorietenlijst staat, anders false.
+     */
     override fun isBeerInFavorites(beerId: Int): Boolean {
         return favoriteBeerDao
             .isBeerInFavorites(beerId)
     }
 
-    private suspend fun refresh() {
-        beerApiService
-            .getBeers()
-            .forEach {
-                favoriteBeerDao.insertFavoriteBeer(it.asBeerObject().asDbFavoriteBeer())
-            }
-    }
 }
