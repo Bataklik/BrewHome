@@ -1,4 +1,4 @@
-package com.example.brewhome
+package com.bataklik.brewhome
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.brewhome"
+    namespace = "com.bataklik.brewhome"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.brewhome"
+        applicationId = "com.bataklik.brewhome"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

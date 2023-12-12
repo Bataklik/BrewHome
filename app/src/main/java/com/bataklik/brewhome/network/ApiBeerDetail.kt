@@ -1,7 +1,7 @@
-package com.example.brewhome.network
+package com.bataklik.brewhome.network
 
 
-import com.example.brewhome.model.BeerDetail
+import com.bataklik.brewhome.model.BeerDetail
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient

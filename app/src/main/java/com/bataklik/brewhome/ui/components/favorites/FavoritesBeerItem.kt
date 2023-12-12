@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.components.favorites
+package com.bataklik.brewhome.ui.components.favorites
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -23,13 +24,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.brewhome.R
-import com.example.brewhome.model.Beer
+import com.bataklik.brewhome.R
+import com.bataklik.brewhome.model.Beer
 
 @Composable
 fun FavoritesBeerItem(
@@ -61,7 +63,7 @@ fun FavoritesBeerItem(
                 Column(modifier = modifier.padding(vertical = 2.dp)) {
                     BeerTitle(beer.name)
                     Spacer(modifier = modifier.padding(vertical = 2.dp))
-                    BeerTagline(beer.tagline)
+                    BeerTagline(modifier, beer.tagline)
                     BeerAbv(beer.abv)
                 }
                 BeerUnfavoriteButton(deleteFromFavoriteBeers, beer.id)
@@ -95,14 +97,18 @@ private fun BeerAbv(beerAbv: Double) {
 }
 
 @Composable
-private fun BeerTagline(beerTagline: String) {
+private fun BeerTagline(modifier: Modifier, beerTagline: String) {
     Text(
         text = beerTagline,
-        maxLines = 1,
+        modifier = modifier
+            .widthIn(max = 200.dp)
+            .padding(2.dp),
+        maxLines = 2,
         style = TextStyle(
-            fontStyle = FontStyle.Italic
+            fontStyle = FontStyle.Italic,
         ),
         overflow = TextOverflow.Ellipsis,
+        softWrap = true
     )
 }
 

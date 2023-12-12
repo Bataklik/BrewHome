@@ -1,11 +1,11 @@
-package com.example.brewhome.data
+package com.bataklik.brewhome.data
 
-import com.example.brewhome.data.database.DbFavoriteBeer
-import com.example.brewhome.data.database.FavoriteBeerDao
-import com.example.brewhome.data.database.asDomainBeer
-import com.example.brewhome.data.database.asDomainFavoriteBeers
-import com.example.brewhome.model.Beer
-import com.example.brewhome.model.asDbFavoriteBeer
+import com.bataklik.brewhome.data.database.DbFavoriteBeer
+import com.bataklik.brewhome.data.database.FavoriteBeerDao
+import com.bataklik.brewhome.data.database.asDomainBeer
+import com.bataklik.brewhome.data.database.asDomainFavoriteBeers
+import com.bataklik.brewhome.model.Beer
+import com.bataklik.brewhome.model.asDbFavoriteBeer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber

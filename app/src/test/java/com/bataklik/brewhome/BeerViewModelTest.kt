@@ -1,8 +1,8 @@
-package com.example.brewhome
+package com.bataklik.brewhome
 
-import com.example.brewhome.fake.FakeBeerRepository
-import com.example.brewhome.fake.FakeFavoriteBeerRepository
-import com.example.brewhome.viewmodel.BeerViewModel
+import com.bataklik.brewhome.fake.FakeBeerRepository
+import com.bataklik.brewhome.fake.FakeFavoriteBeerRepository
+import com.bataklik.brewhome.viewmodel.BeerViewModel
 import org.junit.Before
 import org.junit.Rule
 

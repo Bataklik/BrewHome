@@ -1,4 +1,4 @@
-package com.bataklik.brewhome.ui.components.favorites
+package com.bataklik.brewhome.layout.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -51,7 +51,7 @@ fun NoItemsCard(
                 )
                 Column(
                     modifier = modifier
-                        .padding(horizontal = 10.dp),
+                        .padding(horizontal = 5.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(

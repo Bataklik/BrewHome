@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.theme
+package com.bataklik.brewhome.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

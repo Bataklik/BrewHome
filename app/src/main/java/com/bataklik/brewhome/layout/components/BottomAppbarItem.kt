@@ -1,4 +1,4 @@
-package com.example.brewhome.layout.components
+package com.bataklik.brewhome.layout.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton

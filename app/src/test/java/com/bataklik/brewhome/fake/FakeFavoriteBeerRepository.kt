@@ -1,9 +1,9 @@
-package com.example.brewhome.fake
+package com.bataklik.brewhome.fake
 
-import com.example.brewhome.data.FavoriteBeerRepository
-import com.example.brewhome.data.database.DbFavoriteBeer
-import com.example.brewhome.fake.data.FakeFavoriteDataSource
-import com.example.brewhome.model.Beer
+import com.bataklik.brewhome.data.FavoriteBeerRepository
+import com.bataklik.brewhome.data.database.DbFavoriteBeer
+import com.bataklik.brewhome.fake.data.FakeFavoriteDataSource
+import com.bataklik.brewhome.model.Beer
 import kotlinx.coroutines.flow.Flow
 
 class FakeFavoriteBeerRepository : FavoriteBeerRepository {

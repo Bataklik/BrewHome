@@ -1,4 +1,4 @@
-package com.example.brewhome.data.database
+package com.bataklik.brewhome.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.components.beerDetail
+package com.bataklik.brewhome.ui.components.beerDetail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -14,7 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.brewhome.R
+import com.bataklik.brewhome.R
 
 @Composable
  fun BeerDetailHeader(imageUrl: String) {

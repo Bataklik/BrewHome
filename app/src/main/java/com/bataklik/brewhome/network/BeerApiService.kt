@@ -1,4 +1,4 @@
-package com.example.brewhome.network
+package com.bataklik.brewhome.network
 
 import retrofit2.http.GET
 import retrofit2.http.Path

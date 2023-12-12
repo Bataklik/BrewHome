@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.screens
+package com.bataklik.brewhome.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

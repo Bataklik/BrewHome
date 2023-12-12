@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.theme
+package com.bataklik.brewhome.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

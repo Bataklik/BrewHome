@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.screens
+package com.bataklik.brewhome.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -7,9 +7,9 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.brewhome.network.BeerApiState
-import com.example.brewhome.ui.components.discover.DiscoverBeerList
-import com.example.brewhome.ui.components.discover.DiscoverTitle
+import com.bataklik.brewhome.network.BeerApiState
+import com.bataklik.brewhome.ui.components.discover.DiscoverBeerList
+import com.bataklik.brewhome.ui.components.discover.DiscoverTitle
 
 @Composable
 fun DiscoverScreen(
@@ -24,7 +24,11 @@ fun DiscoverScreen(
             .background(MaterialTheme.colorScheme.primary)
     ) {
         DiscoverTitle()
-        DiscoverBeerList(listState, beerApiState, goToDetail)
+        DiscoverBeerList(
+            listState = listState,
+            beerApiState = beerApiState,
+            goToDetail = goToDetail
+        )
     }
 }
 

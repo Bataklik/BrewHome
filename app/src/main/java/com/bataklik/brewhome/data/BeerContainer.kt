@@ -1,9 +1,9 @@
-package com.example.brewhome.data
+package com.bataklik.brewhome.data
 
 import android.content.Context
 import androidx.room.Room
-import com.example.brewhome.data.database.FavoriteBeerDatabase
-import com.example.brewhome.network.BeerApiService
+import com.bataklik.brewhome.data.database.FavoriteBeerDatabase
+import com.bataklik.brewhome.network.BeerApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType

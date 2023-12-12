@@ -1,7 +1,7 @@
-package com.example.brewhome.fake.data
+package com.bataklik.brewhome.fake.data
 
-import com.example.brewhome.model.Beer
-import com.example.brewhome.network.ApiBeer
+import com.bataklik.brewhome.model.Beer
+import com.bataklik.brewhome.network.ApiBeer
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map

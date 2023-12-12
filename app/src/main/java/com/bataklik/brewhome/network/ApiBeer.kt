@@ -1,6 +1,6 @@
-package com.example.brewhome.network
+package com.bataklik.brewhome.network
 
-import com.example.brewhome.model.Beer
+import com.bataklik.brewhome.model.Beer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import timber.log.Timber

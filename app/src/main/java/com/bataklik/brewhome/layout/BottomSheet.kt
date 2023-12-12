@@ -1,12 +1,12 @@
-package com.example.brewhome.layout
+package com.bataklik.brewhome.layout
 
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import com.example.brewhome.model.Beer
-import com.example.brewhome.ui.screens.FavoritesSheet
+import com.bataklik.brewhome.model.Beer
+import com.bataklik.brewhome.ui.screens.FavoritesSheet
 
 /**
  * Composable functie die een Bottom Sheet weergeeft met favoriete bieren en de belangrijkste inhoud.

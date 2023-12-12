@@ -1,4 +1,4 @@
-package com.example.brewhome
+package com.bataklik.brewhome
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.brewhome.ui.theme.BrewHomeTheme
+import com.bataklik.brewhome.ui.theme.BrewHomeTheme
 import timber.log.Timber
 
 /**

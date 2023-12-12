@@ -1,8 +1,7 @@
-package com.example.brewhome.fake.data
+package com.bataklik.brewhome.fake.data
 
-import com.example.brewhome.model.BeerDetail
-import com.example.brewhome.network.ApiBeer
-import com.example.brewhome.network.ApiBeerDetail
+import com.bataklik.brewhome.network.ApiBeer
+import com.bataklik.brewhome.network.ApiBeerDetail
 
 object FakeBeerDataSource {
     const val beerIdOne = 1

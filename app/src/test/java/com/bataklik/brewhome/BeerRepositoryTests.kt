@@ -1,11 +1,11 @@
-package com.example.brewhome
+package com.bataklik.brewhome
 
-import com.example.brewhome.data.ApiBeerRepository
-import com.example.brewhome.data.BeerRepository
-import com.example.brewhome.fake.FakeBeerApiService
-import com.example.brewhome.fake.data.FakeBeerDataSource
-import com.example.brewhome.network.asBeerObject
-import com.example.brewhome.network.asBeerObjects
+import com.bataklik.brewhome.data.ApiBeerRepository
+import com.bataklik.brewhome.data.BeerRepository
+import com.bataklik.brewhome.fake.FakeBeerApiService
+import com.bataklik.brewhome.fake.data.FakeBeerDataSource
+import com.bataklik.brewhome.network.asBeerObject
+import com.bataklik.brewhome.network.asBeerObjects
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before

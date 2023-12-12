@@ -1,10 +1,10 @@
-package com.example.brewhome.data.database
+package com.bataklik.brewhome.data.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.brewhome.model.Beer
-import com.example.brewhome.model.BeerDetail
+import com.bataklik.brewhome.model.Beer
+import com.bataklik.brewhome.model.BeerDetail
 
 
 /**

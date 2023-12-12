@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.components.favorites
+package com.bataklik.brewhome.ui.components.favorites
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -1,4 +1,4 @@
-package com.example.brewhome.layout.components
+package com.bataklik.brewhome.layout.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -7,7 +7,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
-import com.example.brewhome.R
+import com.bataklik.brewhome.R
 
 /**
  * Composable functie die een terugknop in de app-balk weergeeft.

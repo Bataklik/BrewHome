@@ -1,4 +1,4 @@
-package com.example.brewhome
+package com.bataklik.brewhome
 
 import Screen
 import android.annotation.SuppressLint
@@ -21,13 +21,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.brewhome.layout.AppBar
-import com.example.brewhome.layout.BottomAppBar
-import com.example.brewhome.layout.BottomSheet
-import com.example.brewhome.ui.screens.BeerDetailScreen
-import com.example.brewhome.ui.screens.DiscoverScreen
-import com.example.brewhome.ui.screens.SearchScreen
-import com.example.brewhome.viewmodel.BeerViewModel
+import com.bataklik.brewhome.layout.AppBar
+import com.bataklik.brewhome.layout.BottomAppBar
+import com.bataklik.brewhome.layout.BottomSheet
+import com.bataklik.brewhome.ui.screens.BeerDetailScreen
+import com.bataklik.brewhome.ui.screens.DiscoverScreen
+import com.bataklik.brewhome.ui.screens.SearchScreen
+import com.bataklik.brewhome.viewmodel.BeerViewModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 

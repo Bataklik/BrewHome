@@ -1,4 +1,4 @@
-package com.example.brewhome.model
+package com.bataklik.brewhome.model
 
 /**
  * Dataklasse die een gedetailleerd bierobject vertegenwoordigt.

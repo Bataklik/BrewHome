@@ -1,4 +1,4 @@
-package com.example.brewhome.viewmodel
+package com.bataklik.brewhome.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,15 +9,15 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.brewhome.BeerApplication
-import com.example.brewhome.data.BeerRepository
-import com.example.brewhome.data.FavoriteBeerRepository
-import com.example.brewhome.data.database.asDbFavoriteBeer
-import com.example.brewhome.model.Beer
-import com.example.brewhome.model.BeerDetail
-import com.example.brewhome.model.asBeer
-import com.example.brewhome.network.BeerApiState
-import com.example.brewhome.network.BeerDetailApiState
+import com.bataklik.brewhome.BeerApplication
+import com.bataklik.brewhome.data.BeerRepository
+import com.bataklik.brewhome.data.FavoriteBeerRepository
+import com.bataklik.brewhome.data.database.asDbFavoriteBeer
+import com.bataklik.brewhome.model.Beer
+import com.bataklik.brewhome.model.BeerDetail
+import com.bataklik.brewhome.model.asBeer
+import com.bataklik.brewhome.network.BeerApiState
+import com.bataklik.brewhome.network.BeerDetailApiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

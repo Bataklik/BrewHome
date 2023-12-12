@@ -1,4 +1,4 @@
-package com.example.brewhome.layout.components
+package com.bataklik.brewhome.layout.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +13,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.brewhome.R
+import com.bataklik.brewhome.R
 
 
 /**

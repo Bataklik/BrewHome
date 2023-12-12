@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.components.beerDetail
+package com.bataklik.brewhome.ui.components.beerDetail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.brewhome.R
+import com.bataklik.brewhome.R
 
 @Composable
 fun BeerTitle(

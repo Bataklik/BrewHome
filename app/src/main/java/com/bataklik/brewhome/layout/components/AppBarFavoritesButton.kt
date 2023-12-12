@@ -1,4 +1,4 @@
-package com.example.brewhome.layout.components
+package com.bataklik.brewhome.layout.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.brewhome.R
+import com.bataklik.brewhome.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

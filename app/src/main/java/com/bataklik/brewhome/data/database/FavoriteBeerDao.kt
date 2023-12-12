@@ -1,4 +1,4 @@
-package com.example.brewhome.data.database
+package com.bataklik.brewhome.data.database
 
 import androidx.room.Dao
 import androidx.room.Delete

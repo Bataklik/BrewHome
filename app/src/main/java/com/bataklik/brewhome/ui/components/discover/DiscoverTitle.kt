@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.components.discover
+package com.bataklik.brewhome.ui.components.discover
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme

@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.components.discover
+package com.bataklik.brewhome.ui.components.discover
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -29,7 +29,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.brewhome.R
+import com.bataklik.brewhome.R
 
 @Composable
 fun DiscoverBeerCard(

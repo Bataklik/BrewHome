@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.screens
+package com.bataklik.brewhome.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,17 +11,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.brewhome.model.BeerDetail
-import com.example.brewhome.network.BeerDetailApiState
-import com.example.brewhome.ui.components.beerDetail.BeerAbv
-import com.example.brewhome.ui.components.beerDetail.BeerAcidity
-import com.example.brewhome.ui.components.beerDetail.BeerDescription
-import com.example.brewhome.ui.components.beerDetail.BeerDetailHeader
-import com.example.brewhome.ui.components.beerDetail.BeerEbc
-import com.example.brewhome.ui.components.beerDetail.BeerFirstBrew
-import com.example.brewhome.ui.components.beerDetail.BeerSRM
-import com.example.brewhome.ui.components.beerDetail.BeerTagline
-import com.example.brewhome.ui.components.beerDetail.BeerTitle
+import com.bataklik.brewhome.model.BeerDetail
+import com.bataklik.brewhome.network.BeerDetailApiState
+import com.bataklik.brewhome.ui.components.beerDetail.BeerAbv
+import com.bataklik.brewhome.ui.components.beerDetail.BeerAcidity
+import com.bataklik.brewhome.ui.components.beerDetail.BeerDescription
+import com.bataklik.brewhome.ui.components.beerDetail.BeerDetailHeader
+import com.bataklik.brewhome.ui.components.beerDetail.BeerEbc
+import com.bataklik.brewhome.ui.components.beerDetail.BeerFirstBrew
+import com.bataklik.brewhome.ui.components.beerDetail.BeerSRM
+import com.bataklik.brewhome.ui.components.beerDetail.BeerTagline
+import com.bataklik.brewhome.ui.components.beerDetail.BeerTitle
 
 @Composable
 fun BeerDetailScreen(

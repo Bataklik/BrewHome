@@ -1,6 +1,6 @@
-package com.example.brewhome.network
+package com.bataklik.brewhome.network
 
-import com.example.brewhome.model.BeerDetail
+import com.bataklik.brewhome.model.BeerDetail
 
 /**
  * Sealed interface die de verschillende staten vertegenwoordigt bij het ophalen van gedetailleerde bierinformatie

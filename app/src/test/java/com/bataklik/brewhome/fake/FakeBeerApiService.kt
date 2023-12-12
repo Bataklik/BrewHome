@@ -1,9 +1,9 @@
-package com.example.brewhome.fake
+package com.bataklik.brewhome.fake
 
-import com.example.brewhome.fake.data.FakeBeerDataSource
-import com.example.brewhome.network.ApiBeer
-import com.example.brewhome.network.ApiBeerDetail
-import com.example.brewhome.network.BeerApiService
+import com.bataklik.brewhome.fake.data.FakeBeerDataSource
+import com.bataklik.brewhome.network.ApiBeer
+import com.bataklik.brewhome.network.ApiBeerDetail
+import com.bataklik.brewhome.network.BeerApiService
 
 class FakeBeerApiService : BeerApiService {
     override suspend fun getRandomBeer(): List<ApiBeer> {

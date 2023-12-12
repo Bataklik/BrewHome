@@ -1,8 +1,8 @@
-package com.example.brewhome
+package com.bataklik.brewhome
 
 import android.app.Application
-import com.example.brewhome.data.BeerContainer
-import com.example.brewhome.data.DefaultBeerContainer
+import com.bataklik.brewhome.data.BeerContainer
+import com.bataklik.brewhome.data.DefaultBeerContainer
 
 class BeerApplication : Application() {
     lateinit var container: BeerContainer

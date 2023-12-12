@@ -1,7 +1,6 @@
-package com.example.brewhome.ui.components.discover
+package com.bataklik.brewhome.ui.components.discover
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,17 +9,21 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.brewhome.network.BeerApiState
+import com.bataklik.brewhome.R
+import com.bataklik.brewhome.layout.components.NoItemsCard
+import com.bataklik.brewhome.network.BeerApiState
 
 @Composable
 fun DiscoverBeerList(
+    modifier: Modifier = Modifier,
     listState: LazyListState,
     beerApiState: BeerApiState,
     goToDetail: (beerId: Int) -> Unit
 ) {
     LazyColumn(
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = 15.dp)
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(5.dp),
@@ -29,9 +32,12 @@ fun DiscoverBeerList(
         when (beerApiState) {
             is BeerApiState.ErrorBeers -> {
                 item {
-                    Box {
-                        Text("Failed to load the API")
-                    }
+                    NoItemsCard(
+                        modifier = modifier,
+                        painterIcon = painterResource(id = R.drawable.warning_24px),
+                        titleText = "Error: No Beers",
+                        descriptionText = "Oops! It seems like an oversight occurred. There are currently no beers in your dashboard."
+                    )
                 }
             }
 

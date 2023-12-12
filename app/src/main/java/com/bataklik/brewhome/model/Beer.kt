@@ -1,6 +1,6 @@
-package com.example.brewhome.model
+package com.bataklik.brewhome.model
 
-import com.example.brewhome.data.database.DbFavoriteBeer
+import com.bataklik.brewhome.data.database.DbFavoriteBeer
 /**
  * Dataklasse die een bierobject vertegenwoordigt.
  * @property id Unieke identificatie voor het bier.

@@ -1,4 +1,4 @@
-package com.example.brewhome
+package com.bataklik.brewhome
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -12,7 +12,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
-import com.example.brewhome.ui.theme.BrewHomeTheme
+import com.bataklik.brewhome.ui.theme.BrewHomeTheme
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule

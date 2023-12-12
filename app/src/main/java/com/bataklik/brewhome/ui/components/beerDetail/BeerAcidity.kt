@@ -1,4 +1,4 @@
-package com.example.brewhome.ui.components.beerDetail
+package com.bataklik.brewhome.ui.components.beerDetail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

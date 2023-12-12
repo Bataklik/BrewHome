@@ -1,10 +1,10 @@
-package com.example.brewhome.data
+package com.bataklik.brewhome.data
 
-import com.example.brewhome.model.Beer
-import com.example.brewhome.model.BeerDetail
-import com.example.brewhome.network.BeerApiService
-import com.example.brewhome.network.asBeerObject
-import com.example.brewhome.network.asBeerObjects
+import com.bataklik.brewhome.model.Beer
+import com.bataklik.brewhome.model.BeerDetail
+import com.bataklik.brewhome.network.BeerApiService
+import com.bataklik.brewhome.network.asBeerObject
+import com.bataklik.brewhome.network.asBeerObjects
 
 /**
  * Repository-interface die de functies definieert voor het ophalen van bierinformatie van de Beer API.
