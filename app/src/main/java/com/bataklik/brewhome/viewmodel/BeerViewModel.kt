@@ -18,6 +18,7 @@ import com.bataklik.brewhome.model.BeerDetail
 import com.bataklik.brewhome.model.asBeer
 import com.bataklik.brewhome.network.BeerApiState
 import com.bataklik.brewhome.network.BeerDetailApiState
+import com.bataklik.brewhome.network.BeerSearchApiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -30,25 +31,43 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
 
+/**
+ * ViewModel voor biergegevens en API-oproepen.
+ * @param beerRepository Repository voor biergegevens van de API.
+ * @param favoriteBeerRepository Repository voor favoriete bieren.
+ */
 class BeerViewModel(
     private val beerRepository: BeerRepository,
     private val favoriteBeerRepository: FavoriteBeerRepository
 ) : ViewModel() {
+    // Staat van de UI-gegevens
     private val _beersState =
         MutableStateFlow(BeerViewModelState(emptyList(), null, listOf()))
     val uiState: StateFlow<BeerViewModelState> = _beersState
         .asStateFlow()
+
+    // Staat van de lijst met favoriete bieren
     lateinit var uiListState: StateFlow<List<Beer>>
 
+    // Staat van de API-oproepen
     var beerApiState: BeerApiState by mutableStateOf(BeerApiState.LoadingBeers)
         private set
     var beerDetailApiState: BeerDetailApiState by mutableStateOf(BeerDetailApiState.LoadingBeer)
         private set
+    var beerSeachApiState: BeerSearchApiState by mutableStateOf(BeerSearchApiState.LoadingBeers)
+        private set
 
+    /**
+     * Initialiseert de ViewModel en haalt de lijst met bieren op van de API.
+     */
     init {
         getApiBeers()
     }
 
+    /**
+     * Haalt lijst met bieren op van de API en werkt [beerApiState] bij.
+     * @throws IOException Bij problemen met de API-oproep.
+     */
     private fun getApiBeers() {
         viewModelScope.launch {
             beerApiState = try {
@@ -59,7 +78,6 @@ class BeerViewModel(
                         started = SharingStarted.WhileSubscribed(5_000L),
                         initialValue = listOf()
                     )
-                print(uiListState.value)
 
                 Timber.i("Favorite Beers: $uiListState")
 
@@ -74,6 +92,37 @@ class BeerViewModel(
         }
     }
 
+    /**
+     * Zoekt bieren op basis van [beerName] en werkt [BeerSearchApiState] bij.
+     * Deze functie start een coroutine binnen de [viewModelScope] om de API-oproep uit te voeren. Als de oproep succesvol is,
+     * wordt [BeerSearchApiState.SuccessSearchBeers] met de opgehaalde bieren teruggegeven. Bij een fout wordt
+     * [BeerSearchApiState.ErrorBeers] ingesteld.
+     * @param beerName Naam van het bier om op te zoeken.
+     * @see beerRepository
+     * @see BeerSearchApiState
+     * @throws IOException Bij problemen met de API-oproep.
+     */
+    fun getSeachApiBeers(beerName: String) {
+        viewModelScope.launch {
+            beerSeachApiState = try {
+                if (beerName.isEmpty()) {
+                    BeerSearchApiState.SuccessSearchBeers(listOf())
+                }
+                val resultBeers = beerRepository
+                    .getBeerByName(beerName = beerName)
+                BeerSearchApiState
+                    .SuccessSearchBeers(resultBeers)
+            } catch (e: Exception) {
+                Timber.i("Failed to use api: $e")
+                BeerSearchApiState.ErrorBeers
+            }
+        }
+    }
+
+    /**
+     * Haalt een bier op van de API op basis van [beerId] en werkt [beerDetailApiState] bij.
+     * @throws IOException Bij problemen met de API-oproep.
+     */
     fun getBeerById(beerId: Int) {
         viewModelScope.launch {
             beerDetailApiState = try {
@@ -88,12 +137,19 @@ class BeerViewModel(
         }
     }
 
+    /**
+     * Stelt het huidige bier in binnen de [uiState].
+     * @param beer Het bier dat moet worden ingesteld als het huidige bier.
+     */
     private fun setCurrentBeer(beer: BeerDetail) {
         _beersState.update {
             it.copy(currentBeerById = beer)
         }
     }
 
+    /**
+     * Voegt huidige bier toe aan favorieten.
+     */
     fun addBeerToFavorites() {
         val beer = _beersState.value.currentBeerById
         if (beer != null) {
@@ -104,6 +160,10 @@ class BeerViewModel(
         }
     }
 
+    /**
+     * Verwijdert bier met [id] uit favorieten.
+     * @param id Het unieke identificatienummer van het te verwijderen bier.
+     */
     fun deleteFromFavoriteBeers(id: Int) {
         viewModelScope.launch {
             val toDeleteBeer = beerRepository
@@ -116,22 +176,19 @@ class BeerViewModel(
 
     }
 
-    fun getFavoriteBeer() {
-        val beer = _beersState.value.currentBeerById
-        if (beer != null) {
-            viewModelScope.launch {
-                favoriteBeerRepository
-                    .getFavoriteBeerById(beer.id)
-            }
-        }
-    }
-
+    /**
+     * Controleert of bier met [routeId] in favorieten staat.
+     * @param routeId Het unieke identificatienummer van het te controleren bier.
+     */
     suspend fun isBeerInFavorites(routeId: Int): Boolean {
         return withContext(Dispatchers.IO) {
             favoriteBeerRepository.isBeerInFavorites(routeId)
         }
     }
 
+    /**
+     * Companion object voor [BeerViewModel] om een [ViewModelProvider.Factory] te verstrekken.
+     */
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {

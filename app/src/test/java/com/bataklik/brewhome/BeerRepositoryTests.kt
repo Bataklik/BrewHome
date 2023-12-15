@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Test
 
 class BeerRepositoryTests {
-    lateinit var repo: BeerRepository
+    private lateinit var repo: BeerRepository
 
     @Before
     fun setup() {
@@ -21,10 +21,14 @@ class BeerRepositoryTests {
 
     @Test
     fun getBeers_veryBeersList() = runTest {
-        val expected = FakeBeerDataSource.beers.asBeerObjects()
-        val actual = repo.getBeers()
+        val expected = FakeBeerDataSource
+            .beers
+            .asBeerObjects()
+        val actual = repo
+            .getBeers()
         assertEquals(expected, actual)
     }
+
 
     @Test
     fun getBeer_byId_veryBeer() = runTest {

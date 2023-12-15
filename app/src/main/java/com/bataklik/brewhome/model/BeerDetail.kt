@@ -55,3 +55,4 @@ fun BeerDetail
     firstBrewed = firstBrewed,
     abv = abv
 )
+

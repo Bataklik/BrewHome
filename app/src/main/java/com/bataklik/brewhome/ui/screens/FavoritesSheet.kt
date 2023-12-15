@@ -20,7 +20,6 @@ fun FavoritesSheet(
     closeSheet: suspend () -> Unit,
     favoriteBeers: List<Beer>,
     deleteFromFavoriteBeers: (Int) -> Unit,
-    isBeerInFavorites: (Int) -> Boolean
 ) {
     val listState = rememberLazyListState()
 
@@ -38,7 +37,6 @@ fun FavoritesSheet(
             listState = listState,
             favoriteBeers = favoriteBeers,
             deleteFromFavoriteBeers = deleteFromFavoriteBeers,
-            isBeerInFavorites = isBeerInFavorites
         )
     }
 }
@@ -47,9 +45,10 @@ fun FavoritesSheet(
 @Composable
 fun FavoritesSheetPreview() {
     BrewHomeTheme {
-        FavoritesSheet(closeSheet = { },
+        FavoritesSheet(
+            closeSheet = { },
             favoriteBeers = listOf(),
             deleteFromFavoriteBeers = { },
-            isBeerInFavorites = { true })
+        )
     }
 }

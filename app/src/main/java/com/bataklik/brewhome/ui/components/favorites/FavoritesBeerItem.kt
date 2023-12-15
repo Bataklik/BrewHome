@@ -24,7 +24,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -38,7 +37,6 @@ fun FavoritesBeerItem(
     modifier: Modifier = Modifier,
     beer: Beer,
     deleteFromFavoriteBeers: (Int) -> Unit,
-    isFavorite: Boolean
 ) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -60,7 +58,9 @@ fun FavoritesBeerItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 BeerImage(modifier, beer.imageUrl)
-                Column(modifier = modifier.padding(vertical = 2.dp)) {
+                Column(modifier = modifier
+                    .padding(vertical = 2.dp)
+                    .weight(1F)) {
                     BeerTitle(beer.name)
                     Spacer(modifier = modifier.padding(vertical = 2.dp))
                     BeerTagline(modifier, beer.tagline)

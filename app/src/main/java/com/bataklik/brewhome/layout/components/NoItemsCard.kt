@@ -51,16 +51,18 @@ fun NoItemsCard(
                 )
                 Column(
                     modifier = modifier
-                        .padding(horizontal = 5.dp),
+                        .padding(horizontal = 5.dp, vertical = 6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = titleText,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight
+                            .Bold
                     )
                     Text(
                         text = descriptionText,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign
+                            .Center
                     )
                 }
             }

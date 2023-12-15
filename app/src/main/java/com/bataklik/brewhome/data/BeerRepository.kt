@@ -39,6 +39,13 @@ interface BeerRepository {
      */
     suspend fun getBeerById(beerId: Int): BeerDetail
 
+    /**
+     * Haal gedetailleerde informatie op over een specifiek bier aan de hand van het opgegeven bier-ID.
+     * @param beerName De naam van het bier.
+     * @return Een ljst met [BeerDetail] objecten dat de gedetailleerde informatie van het opgehaalde bier bevat.
+     */
+    suspend fun getBeerByName(beerName: String): List<Beer>
+
 }
 
 /**
@@ -56,7 +63,6 @@ class ApiBeerRepository(private val beerApiService: BeerApiService) : BeerReposi
             .getBeers()
             .asBeerObjects()
     }
-
 
     /**
      * Haal een paginering van bieren op van de Beer API.
@@ -91,4 +97,16 @@ class ApiBeerRepository(private val beerApiService: BeerApiService) : BeerReposi
             .getBeerById(beerId)[0]
             .asBeerObject()
     }
+    /**
+     * Haal gedetailleerde informatie op over een specifiek bier aan de hand van het opgegeven bier-ID.
+     * @param beerName Het unieke ID van het bier.
+     * @return Een lijst [Beer] objecten dat de gedetailleerde informatie van het opgehaalde bier bevat.
+     */
+    override suspend fun getBeerByName(beerName: String): List<Beer> {
+        return beerApiService
+            .getBeerByName(beerName)
+            .asBeerObjects()
+    }
+
+
 }

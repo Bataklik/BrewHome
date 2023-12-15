@@ -22,7 +22,7 @@ data class ApiBeer(
     val name: String,
     val tagline: String,
     @SerialName("first_brewed") val firstBrewed: String,
-    @SerialName("image_url") val imageUrl: String,
+    @SerialName("image_url") val imageUrl: String?,
     val abv: Double,
 )
 
@@ -36,7 +36,7 @@ fun ApiBeer
     name = name,
     tagline = tagline,
     firstBrewed = firstBrewed,
-    imageUrl = imageUrl,
+    imageUrl = imageUrl ?:"",
     abv = abv
 )
 
@@ -51,11 +51,11 @@ fun List<ApiBeer>.asBeerObjects(): List<Beer> {
         Timber.i("Timber: $it")
         Beer(
             id = it.id,
-            name = it.name ?: "",
-            tagline = it.tagline ?: "",
+            name = it.name,
+            tagline = it.tagline,
             abv = it.abv,
             imageUrl = it.imageUrl ?: "",
-            firstBrewed = it.firstBrewed ?: "",
+            firstBrewed = it.firstBrewed,
         )
     }
 }

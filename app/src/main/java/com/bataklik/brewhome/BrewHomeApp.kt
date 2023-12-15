@@ -2,6 +2,8 @@ package com.bataklik.brewhome
 
 import Screen
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -31,6 +33,7 @@ import com.bataklik.brewhome.viewmodel.BeerViewModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -112,7 +115,6 @@ fun BrewHomeApp(
     /**
      * Navigeer naar het "BeerDetail"-scherm en
      * toon informatie over het geselecteerde bier.
-     * @param beerId Het ID van het geselecteerde bier.
      */
     val goToDetail = { beerId: Int ->
         beerViewModel
@@ -136,12 +138,16 @@ fun BrewHomeApp(
     val isBeerInFavorites = { id: Int -> runBlocking { beerViewModel.isBeerInFavorites(id) } }
     // endregion
 
+    val getBeersByName = { beerName: String ->
+        beerViewModel.getSeachApiBeers(beerName)
+    }
+
     BottomSheet(
-        closeSheet,
-        scaffoldState,
-        favoriteBeers,
-        deleteBeerFromFavorites,
-        isBeerInFavorites
+        closeSheet = closeSheet,
+        scaffoldState = scaffoldState,
+        favoriteBeers = favoriteBeers,
+        deleteFromFavoriteBeers = deleteBeerFromFavorites,
+        isBeerInFavorites = isBeerInFavorites
     ) {
         Scaffold(
             topBar = {
@@ -183,7 +189,11 @@ fun BrewHomeApp(
                         )
                     }
                     composable(Screen.Search.route) {
-                        SearchScreen()
+                        SearchScreen(
+                            beerSearchApiState = beerViewModel.beerSeachApiState,
+                            getBeersByName=getBeersByName,
+                            goToDetail = goToDetail
+                        )
                     }
                 }
             }

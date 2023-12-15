@@ -17,6 +17,10 @@ class FakeBeerApiService : BeerApiService {
         )
     }
 
+    override suspend fun getBeerByName(beerName: String): List<ApiBeer> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getBeers(): List<ApiBeer> {
         return FakeBeerDataSource
             .beers

@@ -23,7 +23,6 @@ fun FavoritesList(
     listState: LazyListState,
     favoriteBeers: List<Beer>,
     deleteFromFavoriteBeers: (Int) -> Unit,
-    isBeerInFavorites: (Int) -> Boolean
 ) {
 
     LazyColumn(
@@ -45,10 +44,9 @@ fun FavoritesList(
             }
         else
             items(items = favoriteBeers) { beer ->
-                val isFavorite = isBeerInFavorites(beer.id)
+                //val isFavorite = isBeerInFavorites(beer.id)
                 FavoritesBeerItem(
                     beer = beer,
-                    isFavorite = isFavorite,
                     deleteFromFavoriteBeers = deleteFromFavoriteBeers
                 )
             }
@@ -63,7 +61,6 @@ fun FavoritesListPreview() {
         listState = listState,
         favoriteBeers = listOf(),
         deleteFromFavoriteBeers = { },
-        isBeerInFavorites = { true }
     )
 }
 

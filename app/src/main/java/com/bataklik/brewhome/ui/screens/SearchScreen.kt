@@ -1,20 +1,43 @@
 package com.bataklik.brewhome.ui.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.bataklik.brewhome.network.BeerSearchApiState
+import com.bataklik.brewhome.ui.components.search.SearchList
+import com.bataklik.brewhome.ui.components.search.SearchTextField
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun SearchScreen(modifier: Modifier = Modifier) {
-    Box(
+fun SearchScreen(
+    modifier: Modifier = Modifier,
+    beerSearchApiState: BeerSearchApiState,
+    goToDetail: (Int) -> Unit,
+    getBeersByName: (String) -> Unit,
+) {
+    val listState = rememberLazyListState()
+
+    Column(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.primary)
     ) {
-        Text(text = "Search")
+        SearchTextField(
+            modifier,
+            onSearchAction = getBeersByName
+        )
+        SearchList(
+            modifier = modifier,
+            listState = listState,
+            beerSearchApiState = beerSearchApiState,
+            goToDetail = goToDetail
+        )
     }
 }
+

@@ -10,17 +10,21 @@ import com.bataklik.brewhome.network.asBeerObjects
 class FakeBeerRepository : BeerRepository {
     override suspend fun getBeers(): List<Beer> {
         return FakeBeerDataSource
-            .beers.asBeerObjects()
+            .beers
+            .asBeerObjects()
     }
 
     override suspend fun getBeers(page: Int, perPage: Int): List<Beer> {
         return FakeBeerDataSource
-            .beers.asBeerObjects()
+            .beers
+            .asBeerObjects()
     }
 
     override suspend fun getRandomBeer(): List<Beer> {
         return listOf(
-            FakeBeerDataSource.beers.random()
+            FakeBeerDataSource
+                .beers
+                .random()
                 .asBeerObject()
         )
     }
@@ -29,5 +33,9 @@ class FakeBeerRepository : BeerRepository {
         return FakeBeerDataSource
             .beerDetail
             .asBeerObject()
+    }
+
+    override suspend fun getBeerByName(beerName: String): List<Beer> {
+        TODO("Not yet implemented")
     }
 }

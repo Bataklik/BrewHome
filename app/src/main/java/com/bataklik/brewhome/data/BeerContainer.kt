@@ -33,12 +33,13 @@ class DefaultBeerContainer(applicationContext: Context) : BeerContainer {
      */
     private val json: Json = Json {
         ignoreUnknownKeys = true
+        coerceInputValues = true
     }
-
     /**
      * Retrofit-instantie voor het maken van HTTP-verzoeken
      */
-    private val retrofit = Retrofit.Builder()
+    private val retrofit = Retrofit
+        .Builder()
         .addConverterFactory(
             json.asConverterFactory(
                 "application/json"
