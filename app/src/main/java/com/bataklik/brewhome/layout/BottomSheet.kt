@@ -14,7 +14,6 @@ import com.bataklik.brewhome.ui.screens.FavoritesSheet
  * @param scaffoldState De toestand van het BottomSheetScaffold.
  * @param favoriteBeers De staat van de lijst met favoriete bieren.
  * @param deleteFromFavoriteBeers Een functie om een bier te verwijderen uit de lijst met favoriete bieren.
- * @param isBeerInFavorites Een functie die controleert of een bier in de lijst met favoriete bieren staat.
  * @param content De hoofdinhoud van het scherm.
  */
 @Composable
@@ -24,7 +23,6 @@ fun BottomSheet(
     scaffoldState: BottomSheetScaffoldState,
     favoriteBeers: State<List<Beer>>,
     deleteFromFavoriteBeers: (Int) -> Unit,
-    isBeerInFavorites: (Int) -> Boolean,
     content: @Composable () -> Unit,
 ) {
     BottomSheetScaffold(
@@ -33,7 +31,6 @@ fun BottomSheet(
                 closeSheet = { closeSheet() },
                 favoriteBeers = favoriteBeers.value,
                 deleteFromFavoriteBeers = deleteFromFavoriteBeers,
-                isBeerInFavorites = isBeerInFavorites
             )
         },
         sheetSwipeEnabled = false,

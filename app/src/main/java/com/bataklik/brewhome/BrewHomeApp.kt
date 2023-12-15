@@ -147,7 +147,6 @@ fun BrewHomeApp(
         scaffoldState = scaffoldState,
         favoriteBeers = favoriteBeers,
         deleteFromFavoriteBeers = deleteBeerFromFavorites,
-        isBeerInFavorites = isBeerInFavorites
     ) {
         Scaffold(
             topBar = {
