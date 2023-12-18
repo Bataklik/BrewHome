@@ -1,5 +1,11 @@
 package com.bataklik.brewhome.ui.screens
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection.Companion.Right
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.EaseOut
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -29,22 +35,40 @@ fun BeerDetailScreen(
     addBeerToFavorites: () -> Unit,
     isBeerInFavorites: (Int) -> Boolean,
 ) {
-    when (beerDetailApiState) {
-        is BeerDetailApiState.ErrorBeer -> {
-            BeerErrorScreen()
-        }
+    AnimatedContent(
+        targetState = beerDetailApiState, label = "beerDetailApiState",
+        transitionSpec = {
+            slideIntoContainer(
+                animationSpec = tween(400, easing = EaseIn),
+                towards = Right,
 
-        is BeerDetailApiState.LoadingBeer -> {
-            BeerLoadingScreen()
-        }
-
-        is BeerDetailApiState.SuccessBeer -> {
-            val currentBeer = beerDetailApiState.beer
-            BeerSuccessScreen(
-                currentBeer = currentBeer,
-                addBeerToFavorites = addBeerToFavorites,
-                isBeerInFavorites = isBeerInFavorites
+            ).togetherWith(
+                slideOutOfContainer(
+                    animationSpec = tween(50, easing = EaseOut),
+                    towards = Right
+                )
             )
+        }
+    ) { targetState ->
+        when (targetState) {
+            is BeerDetailApiState.ErrorBeer -> {
+                BeerErrorScreen()
+            }
+
+            is BeerDetailApiState.LoadingBeer -> {
+                BeerLoadingScreen()
+            }
+
+            is BeerDetailApiState.SuccessBeer -> {
+                val currentBeer = targetState
+                    .beer
+                val beerFavorite = isBeerInFavorites(currentBeer.id)
+                BeerSuccessScreen(
+                    currentBeer = currentBeer,
+                    addBeerToFavorites = addBeerToFavorites,
+                    isBeerInFavorites = beerFavorite
+                )
+            }
         }
     }
 }
@@ -58,10 +82,9 @@ private fun BeerLoadingScreen() {
 private fun BeerSuccessScreen(
     currentBeer: BeerDetail,
     addBeerToFavorites: () -> Unit,
-    isBeerInFavorites: (Int) -> Boolean,
+    isBeerInFavorites: Boolean,
 ) {
 
-    val beerFavorite = { isBeerInFavorites(currentBeer.id) }
 
     Column(
         modifier = Modifier.fillMaxHeight(),
@@ -74,7 +97,7 @@ private fun BeerSuccessScreen(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(1) {
-                BeerTitle(currentBeer.name, addBeerToFavorites, beerFavorite)
+                BeerTitle(currentBeer.name, addBeerToFavorites, isBeerInFavorites)
                 BeerTagline(currentBeer.tagline)
                 BeerFirstBrew(currentBeer.firstBrewed)
                 BeerAbv(currentBeer.abv)

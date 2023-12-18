@@ -43,7 +43,7 @@ class BeerViewModel(
     // Staat van de UI-gegevens
     private val _beersState =
         MutableStateFlow(BeerViewModelState(emptyList(), null, listOf()))
-    val uiState: StateFlow<BeerViewModelState> = _beersState
+    val beerState: StateFlow<BeerViewModelState> = _beersState
         .asStateFlow()
 
     // Staat van de lijst met favoriete bieren
@@ -78,19 +78,21 @@ class BeerViewModel(
                         started = SharingStarted.WhileSubscribed(5_000L),
                         initialValue = listOf()
                     )
-
-                Timber.i("Favorite Beers: $uiListState")
-
-                val randomPage = (1..10).random()
+                /*                val randomPage = (1..10)
+                                    .random()*/
                 val resultBeers = beerRepository
-                    .getBeers(randomPage, 20)
-                BeerApiState.SuccessBeers(resultBeers)
+                    .getBeers()
+                setBeersInState(resultBeers)
+                BeerApiState
+                    .SuccessBeers(resultBeers)
             } catch (e: IOException) {
-                Timber.i("Failed to use api: $e")
-                BeerApiState.ErrorBeers
+                BeerApiState
+                    .ErrorBeers
             }
         }
     }
+
+
 
     /**
      * Zoekt bieren op basis van [beerName] en werkt [BeerSearchApiState] bij.
@@ -126,10 +128,11 @@ class BeerViewModel(
     fun getBeerById(beerId: Int) {
         viewModelScope.launch {
             beerDetailApiState = try {
-                val apiBeer = beerRepository
+                val beerDetail = beerRepository
                     .getBeerById(beerId)
-                setCurrentBeer(apiBeer)
-                BeerDetailApiState.SuccessBeer(apiBeer)
+                setBeerInState(beerDetail)
+                BeerDetailApiState
+                    .SuccessBeer(beerDetail)
             } catch (e: IOException) {
                 Timber.i("Failed to use api: $e")
                 BeerDetailApiState.ErrorBeer
@@ -138,20 +141,32 @@ class BeerViewModel(
     }
 
     /**
-     * Stelt het huidige bier in binnen de [uiState].
+     * Stelt het huidige bier in binnen de [beerState].
      * @param beer Het bier dat moet worden ingesteld als het huidige bier.
      */
-    private fun setCurrentBeer(beer: BeerDetail) {
+    private fun setBeerInState(beer: BeerDetail) {
         _beersState.update {
             it.copy(currentBeerById = beer)
         }
+    }
+    /**
+     * Stelt de bieren lijst in binnen de [beerState] .
+     * @param beers De lijst van bieren.
+     */
+    private fun setBeersInState(beers: List<Beer>) {
+        _beersState
+            .update {
+                it.copy(currentBeers = beers)
+            }
     }
 
     /**
      * Voegt huidige bier toe aan favorieten.
      */
     fun addBeerToFavorites() {
-        val beer = _beersState.value.currentBeerById
+        val beer = _beersState
+            .value
+            .currentBeerById
         if (beer != null) {
             viewModelScope.launch {
                 favoriteBeerRepository

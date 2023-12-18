@@ -22,7 +22,7 @@ class BeerRepositoryTests {
     @Test
     fun getBeers_veryBeersList() = runTest {
         val expected = FakeBeerDataSource
-            .beers
+            .BEERS
             .asBeerObjects()
         val actual = repo
             .getBeers()
@@ -33,7 +33,7 @@ class BeerRepositoryTests {
     @Test
     fun getBeer_byId_veryBeer() = runTest {
         val expected = FakeBeerDataSource
-            .beerDetail
+            .BEER_DETAIL
             .asBeerObject()
         val actual = repo.getBeerById(1)
         assertEquals(expected, actual)

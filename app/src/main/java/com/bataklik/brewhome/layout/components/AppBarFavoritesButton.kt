@@ -25,7 +25,9 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun AppBarFavoritesButton(
-    coroutineScope: CoroutineScope, openSheet: suspend () -> Unit, modifier: Modifier
+    modifier: Modifier,
+    coroutineScope: CoroutineScope,
+    openSheet: suspend () -> Unit,
 ) {
     Button(onClick = {
         coroutineScope.launch {

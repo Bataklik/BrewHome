@@ -10,7 +10,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,7 +25,7 @@ import com.bataklik.brewhome.R
 fun BeerTitle(
     beerTitle: String,
     addBeerToFavorites: () -> Unit,
-    beerFavorite: () -> Boolean,
+    beerFavorite: Boolean,
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -46,7 +46,9 @@ private fun BeerTitleText(beerTitle: String) {
 }
 
 @Composable
-private fun BeerFavorite(addBeerToFavorites: () -> Unit, beerFavorite: () -> Boolean) {
+private fun BeerFavorite(
+    addBeerToFavorites: () -> Unit, beerFavorite: Boolean
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         BeerFavoriteLabel()
         FavoriteIcon(addBeerToFavorites, beerFavorite)
@@ -63,14 +65,16 @@ private fun BeerFavoriteLabel() {
 }
 
 @Composable
-fun FavoriteIcon(addBeerToFavorites: () -> Unit, isBeerInFavorites: () -> Boolean) {
+fun FavoriteIcon(
+    addBeerToFavorites: () -> Unit, isBeerInFavorites: Boolean
+) {
     var isFavorite by remember { mutableStateOf(false) }
     val heartPlusIcon = painterResource(id = R.drawable.heart_plus_24px)
     val heartCheckIcon = painterResource(id = R.drawable.heart_check_24px)
 
     // Net hetzelfde als UseEffect van React
-    LaunchedEffect(isFavorite) {
-        isFavorite = isBeerInFavorites()
+    SideEffect {
+        isFavorite = isBeerInFavorites
     }
     IconButton(onClick = {
         if (!isFavorite) {

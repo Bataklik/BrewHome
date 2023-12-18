@@ -70,7 +70,7 @@ fun BrewHomeApp(
     val currentScreenTitle = when (backStackEntry?.destination?.route) {
         Screen.Discover.route -> Screen.Discover.toString()
         Screen.Search.route -> Screen.Search.toString()
-        Screen.BeerDetail().route -> Screen.BeerDetail().toString()
+        Screen.BeerDetail.route -> Screen.BeerDetail.toString()
         else -> Screen.Discover.toString()
     }
     val canNavigateBack = {
@@ -120,7 +120,7 @@ fun BrewHomeApp(
         beerViewModel
             .getBeerById(beerId)
         navController
-            .navigate(Screen.BeerDetail(beerId).route)
+            .navigate(Screen.BeerDetail.route)
     }
     // endregion
 
@@ -180,7 +180,7 @@ fun BrewHomeApp(
                             goToDetail = goToDetail
                         )
                     }
-                    composable(Screen.BeerDetail().route) {
+                    composable(Screen.BeerDetail.route) {
                         BeerDetailScreen(
                             beerDetailApiState = beerViewModel.beerDetailApiState,
                             addBeerToFavorites = { addBeerToFavorites() },
@@ -190,7 +190,7 @@ fun BrewHomeApp(
                     composable(Screen.Search.route) {
                         SearchScreen(
                             beerSearchApiState = beerViewModel.beerSeachApiState,
-                            getBeersByName=getBeersByName,
+                            getBeersByName = getBeersByName,
                             goToDetail = goToDetail
                         )
                     }

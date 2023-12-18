@@ -1,5 +1,12 @@
 package com.bataklik.brewhome.layout
 
+import Screen
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,6 +39,7 @@ fun AppBar(
     currentScreenTitle: String,
 ) {
     val coroutineScope = rememberCoroutineScope()
+    val isBeerDetailScreen = { currentScreenTitle == Screen.BeerDetail.toString() }
     TopAppBar(
         modifier = modifier
             .height(70.dp)
@@ -41,12 +49,33 @@ fun AppBar(
             titleContentColor = MaterialTheme.colorScheme.secondary
         ),
         navigationIcon = {
-            if (canNavigateBack()) {
+            AnimatedVisibility(
+                visible = canNavigateBack(),
+                enter = slideInHorizontally() + fadeIn(),
+                exit = slideOutHorizontally(
+                    animationSpec = tween(500),
+                    targetOffsetX = { -1000 }
+                ) + fadeOut(),
+            ) {
                 AppBarBackButton(navigateUp)
             }
         },
         actions = {
-            AppBarFavoritesButton(coroutineScope, openSheet, modifier)
+            AnimatedVisibility(
+                visible = !isBeerDetailScreen(),
+                enter = slideInHorizontally() + fadeIn(),
+                exit = slideOutHorizontally(
+                    animationSpec = tween(500),
+                    targetOffsetX = { 1000 }
+                ) + fadeOut(),
+            ) {
+                AppBarFavoritesButton(
+                    modifier = modifier,
+                    coroutineScope = coroutineScope,
+                    openSheet = openSheet,
+                )
+            }
+
         },
 
         title = {

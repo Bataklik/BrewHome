@@ -13,7 +13,7 @@ class FakeBeerApiService : BeerApiService {
     override suspend fun getBeerById(beerId: Int): List<ApiBeerDetail> {
         return listOf(
             FakeBeerDataSource
-                .beerDetail
+                .BEER_DETAIL
         )
     }
 
@@ -23,7 +23,7 @@ class FakeBeerApiService : BeerApiService {
 
     override suspend fun getBeers(): List<ApiBeer> {
         return FakeBeerDataSource
-            .beers
+            .BEERS
     }
 
     override suspend fun getBeers(page: Int, perPage: Int): List<ApiBeer> {

@@ -1,5 +1,13 @@
 package com.bataklik.brewhome.ui.components.discover
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection.Companion.Down
+import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection.Companion.Up
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.EaseOut
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,6 +23,7 @@ import com.bataklik.brewhome.R
 import com.bataklik.brewhome.layout.components.NoItemsCard
 import com.bataklik.brewhome.network.BeerApiState
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun DiscoverBeerList(
     modifier: Modifier = Modifier,
@@ -22,42 +31,59 @@ fun DiscoverBeerList(
     beerApiState: BeerApiState,
     goToDetail: (beerId: Int) -> Unit
 ) {
-    LazyColumn(
-        modifier = modifier
-            .padding(horizontal = 15.dp)
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(5.dp),
-        state = listState
-    ) {
-        when (beerApiState) {
-            is BeerApiState.ErrorBeers -> {
-                item {
-                    NoItemsCard(
-                        modifier = modifier,
-                        painterIcon = painterResource(id = R.drawable.warning_24px),
-                        titleText = "Error: No Beers",
-                        descriptionText = "Oops! It seems like an oversight occurred. There are currently no beers in your dashboard."
-                    )
+    AnimatedContent(
+        label = "beerApiState",
+        targetState = beerApiState,
+        transitionSpec = {
+            slideIntoContainer(
+                animationSpec = tween(500, easing = EaseIn),
+                towards = Up
+            ).togetherWith(
+                slideOutOfContainer(
+                    animationSpec = tween(500, easing = EaseOut),
+                    towards = Down
+                )
+            )
+        }
+    ) { targetState ->
+        LazyColumn(
+            modifier = modifier
+                .padding(horizontal = 15.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(5.dp),
+            state = listState
+        ) {
+            when (targetState) {
+                is BeerApiState.ErrorBeers -> {
+                    item {
+                        NoItemsCard(
+                            modifier = modifier,
+                            painterIcon = painterResource(id = R.drawable.warning_24px),
+                            titleText = "Error: No Beers",
+                            descriptionText = "Oops! It seems like an oversight occurred. There are currently no beers in your dashboard."
+                        )
+                    }
                 }
-            }
 
-            is BeerApiState.LoadingBeers -> {
-                item {
-                    Text(text = "Loading the API...")
+                is BeerApiState.LoadingBeers -> {
+                    item {
+                        Text(text = "Loading the API...")
+                    }
                 }
-            }
 
-            is BeerApiState.SuccessBeers -> {
-                items(beerApiState.beers) { beer ->
-                    DiscoverBeerCard(
-                        beerId = beer.id,
-                        name = beer.name,
-                        tagline = beer.tagline,
-                        firstBrewed = beer.firstBrewed,
-                        imageUrl = beer.imageUrl,
-                        goToDetail = goToDetail
-                    )
+                is BeerApiState.SuccessBeers -> {
+                    items(targetState.beers) { beer ->
+                        DiscoverBeerCard(
+                            beerId = beer.id,
+                            name = beer.name,
+                            tagline = beer.tagline,
+                            firstBrewed = beer.firstBrewed,
+                            imageUrl = beer.imageUrl,
+                            goToDetail = goToDetail
+                        )
+                    }
                 }
+
             }
         }
     }

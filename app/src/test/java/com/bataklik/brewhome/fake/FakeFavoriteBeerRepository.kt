@@ -7,22 +7,22 @@ import com.bataklik.brewhome.model.Beer
 import kotlinx.coroutines.flow.Flow
 
 class FakeFavoriteBeerRepository : FavoriteBeerRepository {
+
+
     override suspend fun insertFavoriteBeer(favBeer: Beer) {
-        TODO("Not yet implemented")
     }
 
     override suspend fun deletefavoriteBeer(favBeer: DbFavoriteBeer) {
-        TODO("Not yet implemented")
     }
 
     override fun getFavoriteBeers(): Flow<List<Beer>> {
         return FakeFavoriteDataSource
-            .beers
+            .BEERS
     }
 
     override fun getFavoriteBeerById(beerId: Int): Beer? {
         return FakeFavoriteDataSource
-            .beer(beerId)
+            .BEER_BY_ID(beerId)
     }
 
     override fun isBeerInFavorites(beerId: Int): Boolean {
