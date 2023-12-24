@@ -24,7 +24,6 @@ fun FavoritesList(
     favoriteBeers: List<Beer>,
     deleteFromFavoriteBeers: (Int) -> Unit,
 ) {
-
     LazyColumn(
         modifier = modifier
             .padding(horizontal = 15.dp, vertical = 10.dp)

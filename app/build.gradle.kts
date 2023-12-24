@@ -55,10 +55,12 @@ android {
 
 
 dependencies {
-    //room
+    // Splashscreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.compose.material3:material3-window-size-class:1.1.2")
+    // RoomDatabase
     val room_version = "2.5.0"
     implementation("androidx.room:room-runtime:$room_version")
-    // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
     // To use Kotlin Symbol Processing (KSP)
     ksp("androidx.room:room-compiler:$room_version")
@@ -67,11 +69,9 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     // Splashscreen
     implementation("androidx.core:core-splashscreen:1.0.1")
-
+    // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
-    // Mongodb
-    // implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.11.0")
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")

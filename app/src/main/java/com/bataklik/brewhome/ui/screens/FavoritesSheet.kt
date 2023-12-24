@@ -20,15 +20,14 @@ fun FavoritesSheet(
     closeSheet: suspend () -> Unit,
     favoriteBeers: List<Beer>,
     deleteFromFavoriteBeers: (Int) -> Unit,
+    isLandscape: Boolean,
+    modifier: Modifier,
 ) {
     val listState = rememberLazyListState()
-
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .fillMaxHeight(),
-        horizontalAlignment = Alignment
-            .CenterHorizontally,
         verticalArrangement = Arrangement
             .spacedBy(10.dp)
     ) {
@@ -44,11 +43,14 @@ fun FavoritesSheet(
 @Preview(showBackground = true, backgroundColor = 0xFFF)
 @Composable
 fun FavoritesSheetPreview() {
+    val isLandscape = false
     BrewHomeTheme {
         FavoritesSheet(
             closeSheet = { },
             favoriteBeers = listOf(),
             deleteFromFavoriteBeers = { },
+            isLandscape = isLandscape,
+            modifier = Modifier,
         )
     }
 }

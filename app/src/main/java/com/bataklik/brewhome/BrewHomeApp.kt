@@ -24,13 +24,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.bataklik.brewhome.layout.AppBar
-import com.bataklik.brewhome.layout.BottomAppBar
+import com.bataklik.brewhome.layout.BottomBar
 import com.bataklik.brewhome.layout.BottomSheet
 import com.bataklik.brewhome.ui.screens.BeerDetailScreen
 import com.bataklik.brewhome.ui.screens.DiscoverScreen
 import com.bataklik.brewhome.ui.screens.SearchScreen
 import com.bataklik.brewhome.viewmodel.BeerViewModel
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -40,42 +39,66 @@ import kotlinx.coroutines.runBlocking
 fun BrewHomeApp(
     navController: NavHostController = rememberNavController(),
     beerViewModel: BeerViewModel = viewModel(factory = BeerViewModel.Factory),
+    isLandscape: Boolean = false,
 ) {
     // region Behandeling van BottomSheet
+    /**
+     * SheetState wordt gebruikt om de [BottomSheet] te tonen.
+     */
     val sheetState = rememberStandardBottomSheetState(
         initialValue = SheetValue.Hidden,
         skipHiddenState = false,
     )
+
+    /**
+     * Opent de [BottomSheet].
+     */
     val openSheet = suspend {
         run {
-            coroutineScope {
-                sheetState.expand()
-            }
+            sheetState.expand()
         }
     }
+
+    /**
+     * Sluit de [BottomSheet].
+     */
     val closeSheet = suspend {
         run {
-            coroutineScope {
-                sheetState.hide()
-            }
+            sheetState.hide()
         }
     }
+
+    /**
+     * ScaffoldState wordt gebruikt
+     * om de [BottomSheet] te tonen.
+     */
     val scaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = sheetState,
     )
     // endregion
 
     // region Behandeling van Navigation
+    /**
+     * Haal de huidige bestemmingsroute op uit de backstack.
+     */
     val backStackEntry by navController.currentBackStackEntryAsState()
+
+    /**
+     * Geeft de titel van het huidige scherm terug.
+     * @return [String] de titel van het huidige scherm.
+     */
     val currentScreenTitle = when (backStackEntry?.destination?.route) {
         Screen.Discover.route -> Screen.Discover.toString()
         Screen.Search.route -> Screen.Search.toString()
         Screen.BeerDetail.route -> Screen.BeerDetail.toString()
         else -> Screen.Discover.toString()
     }
+
+    /**
+     * Controleer of er een vorig scherm in de backstack staat.
+     * @return [Boolean] true als er een vorig scherm in de backstack staat, anders false.
+     */
     val canNavigateBack = {
-        print(navController.previousBackStackEntry)
-        print(navController.currentBackStack)
         navController.previousBackStackEntry != null
     }
     // endregion
@@ -86,28 +109,32 @@ fun BrewHomeApp(
      */
     val navigateUp: () -> Unit = { navController.navigateUp() }
 
-    /***
+    /**
      * Navigeer naar het "Discover"-scherm en
      * verwijder alle tussenliggende schermen,
      * inclusief "Search", uit de backstack.
      */
     val goToDiscover = {
-        navController.navigate(Screen.Discover.route) {
-            popUpTo(Screen.Search.route) {
-                inclusive = true
+        if (navController.currentBackStackEntry?.destination?.route != Screen.Discover.route) {
+            navController.navigate(Screen.Discover.route) {
+                popUpTo(Screen.Search.route) {
+                    inclusive = true
+                }
             }
         }
     }
 
-    /***
+    /**
      *  Navigeer naar het "Search"-scherm en
      *  verwijder alle tussenliggende schermen,
      *  inclusief "Discover", uit de backstack.
      */
     val goToSearch = {
-        navController.navigate(Screen.Search.route) {
-            popUpTo(Screen.Discover.route) {
-                inclusive = true
+        if (navController.currentBackStackEntry?.destination?.route != Screen.Search.route) {
+            navController.navigate(Screen.Search.route) {
+                popUpTo(Screen.Discover.route) {
+                    inclusive = true
+                }
             }
         }
     }
@@ -117,32 +144,57 @@ fun BrewHomeApp(
      * toon informatie over het geselecteerde bier.
      */
     val goToDetail = { beerId: Int ->
-        beerViewModel
-            .getBeerById(beerId)
-        navController
-            .navigate(Screen.BeerDetail.route)
+        if (navController.currentBackStackEntry?.destination?.route != Screen.BeerDetail.route) {
+            beerViewModel
+                .getBeerById(beerId)
+            navController
+                .navigate(Screen.BeerDetail.route)
+        }
     }
     // endregion
 
     // region Behandeling van Favorite beers
-    val favoriteBeers = beerViewModel.uiListState.collectAsState()
+    /**
+     * Haal de lijst met favoriete bieren op uit de lokale database.
+     */
+    val favoriteBeers = beerViewModel
+        .uiListState
+        .collectAsState()
 
+    /**
+     * Voeg het bier toe aan de lokale
+     * lijst met favoriete database.
+     */
     val addBeerToFavorites = {
-        beerViewModel.addBeerToFavorites()
+        beerViewModel
+            .addBeerToFavorites()
     }
 
+    /**
+     * Verwijder het bier uit de lokale database.
+     */
     val deleteBeerFromFavorites = { id: Int ->
-        beerViewModel.deleteFromFavoriteBeers(id)
+        beerViewModel
+            .deleteFromFavoriteBeers(id)
     }
 
+    /**
+     * Controleer of het bier in de lokale database staat.
+     * @return true als het bier in de lokale database staat, anders false.
+     */
     val isBeerInFavorites = { id: Int -> runBlocking { beerViewModel.isBeerInFavorites(id) } }
     // endregion
 
-    val getBeersByName = { beerName: String ->
-        beerViewModel.getSeachApiBeers(beerName)
+    /**
+     * Zoekt bieren op basis van de naam van het bier.
+     */
+    val searchBeersByName = { beerName: String ->
+        beerViewModel
+            .getSeachApiBeers(beerName)
     }
 
     BottomSheet(
+        isLandscape = isLandscape,
         closeSheet = closeSheet,
         scaffoldState = scaffoldState,
         favoriteBeers = favoriteBeers,
@@ -158,7 +210,7 @@ fun BrewHomeApp(
                 )
             },
             bottomBar = {
-                BottomAppBar(
+                BottomBar(
                     goDiscover = goToDiscover,
                     goSearch = goToSearch
                 )
@@ -187,10 +239,11 @@ fun BrewHomeApp(
                             isBeerInFavorites = isBeerInFavorites
                         )
                     }
+
                     composable(Screen.Search.route) {
                         SearchScreen(
                             beerSearchApiState = beerViewModel.beerSeachApiState,
-                            getBeersByName = getBeersByName,
+                            getBeersByName = searchBeersByName,
                             goToDetail = goToDetail
                         )
                     }

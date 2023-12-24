@@ -1,10 +1,15 @@
 package com.bataklik.brewhome.layout
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.bataklik.brewhome.model.Beer
 import com.bataklik.brewhome.ui.screens.FavoritesSheet
 
@@ -19,6 +24,8 @@ import com.bataklik.brewhome.ui.screens.FavoritesSheet
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun BottomSheet(
+    modifier: Modifier = Modifier,
+    isLandscape: Boolean,
     closeSheet: suspend () -> Unit,
     scaffoldState: BottomSheetScaffoldState,
     favoriteBeers: State<List<Beer>>,
@@ -26,15 +33,22 @@ fun BottomSheet(
     content: @Composable () -> Unit,
 ) {
     BottomSheetScaffold(
-        sheetContent = {
-            FavoritesSheet(
-                closeSheet = { closeSheet() },
-                favoriteBeers = favoriteBeers.value,
-                deleteFromFavoriteBeers = deleteFromFavoriteBeers,
-            )
-        },
         sheetSwipeEnabled = false,
-        scaffoldState = scaffoldState
+        scaffoldState = scaffoldState,
+        sheetPeekHeight = 0.dp,
+        sheetContent = {
+            Column(modifier = modifier
+                .fillMaxWidth()
+                .fillMaxHeight()) {
+                FavoritesSheet(
+                    modifier = modifier,
+                    closeSheet = { closeSheet() },
+                    favoriteBeers = favoriteBeers.value,
+                    deleteFromFavoriteBeers = deleteFromFavoriteBeers,
+                    isLandscape = isLandscape,
+                )
+            }
+        },
     ) {
         content()
     }

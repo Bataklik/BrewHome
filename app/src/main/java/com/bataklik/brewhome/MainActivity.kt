@@ -1,11 +1,17 @@
 package com.bataklik.brewhome
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bataklik.brewhome.ui.theme.BrewHomeTheme
@@ -17,22 +23,29 @@ import timber.log.Timber
  * Copyright. All rights reserved
  * deze klasse is de hoofdactiviteit van dit project
  */
+
 class MainActivity() : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
         Timber
             .plant(Timber.DebugTree())
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             BrewHomeTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BrewHomeApp()
+                    val windowSize = calculateWindowSizeClass(this)
+                    val isLandscape = windowSize.heightSizeClass == WindowHeightSizeClass.Compact
+                    BrewHomeApp(isLandscape = isLandscape)
                 }
             }
         }
-
     }
 }
+

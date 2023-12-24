@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalView
 
 
-private val LightColorScheme = lightColorScheme(
+private val lightColorScheme = lightColorScheme(
     primary = PrimaryColor,
     secondary = SecondaryColor,
     background = BackgroundColor,
@@ -23,7 +23,7 @@ private val LightColorScheme = lightColorScheme(
 fun BrewHomeTheme(
     content: @Composable () -> Unit
 ) {
-    val colorScheme = LightColorScheme
+    val colorScheme = lightColorScheme
     LocalView.current
 
     MaterialTheme(

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- splash.xml -->
 <resources>
     <style name="Theme.BrewHome.MySplash" parent="Theme.BrewHome">
-        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenBackground">#FFFEF8ED</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/avd_brewhome</item>
-        <item name="windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/Theme.BrewHome</item>
     </style>
 </resources>
