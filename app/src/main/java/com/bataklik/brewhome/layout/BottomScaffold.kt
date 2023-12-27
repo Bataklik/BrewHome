@@ -23,7 +23,7 @@ import com.bataklik.brewhome.ui.screens.FavoritesSheet
  */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun BottomSheet(
+fun BottomScaffold(
     modifier: Modifier = Modifier,
     isLandscape: Boolean,
     closeSheet: suspend () -> Unit,
@@ -41,11 +41,10 @@ fun BottomSheet(
                 .fillMaxWidth()
                 .fillMaxHeight()) {
                 FavoritesSheet(
-                    modifier = modifier,
                     closeSheet = { closeSheet() },
                     favoriteBeers = favoriteBeers.value,
                     deleteFromFavoriteBeers = deleteFromFavoriteBeers,
-                    isLandscape = isLandscape,
+                    modifier = modifier,
                 )
             }
         },

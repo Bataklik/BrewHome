@@ -25,13 +25,13 @@ import timber.log.Timber
  */
 
 class MainActivity() : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     @RequiresApi(Build.VERSION_CODES.O)
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        Timber
-            .plant(Timber.DebugTree())
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        Timber
+            .plant(Timber.DebugTree())
         setContent {
             BrewHomeTheme {
                 Surface(

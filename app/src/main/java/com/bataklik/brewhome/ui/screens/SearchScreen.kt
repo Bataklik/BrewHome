@@ -22,7 +22,6 @@ fun SearchScreen(
     getBeersByName: (String) -> Unit,
 ) {
     val listState = rememberLazyListState()
-
     Column(
         modifier = modifier
             .fillMaxSize()

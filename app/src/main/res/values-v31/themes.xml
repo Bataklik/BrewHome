@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.BrewHome.Main" parent="@android:style/Theme.Material.Light.NoActionBar" />
-
     <style name="Theme.BrewHome.Starting" parent="Theme.BrewHome.Main">
         <item name="windowSplashScreenBackground">#FFFEF8ED</item>
         <item name="postSplashScreenTheme">@style/Theme.BrewHome.Main</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/brewhome</item>
     </style>
 </resources>

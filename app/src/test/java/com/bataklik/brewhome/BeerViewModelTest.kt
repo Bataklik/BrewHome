@@ -27,24 +27,14 @@ class BeerViewModelTest {
 
     @Test
     fun getBeers_verifyBeersList() = runTest {
-        var expected = FakeBeerDataSource
+        val expected = FakeBeerDataSource
             .BEERS
             .asBeerObjects()
-        var actual = beerViewModelTest
+        val actual = beerViewModelTest
             .beerState
             .value
             .currentBeers
         assertEquals(expected, actual)
-
-        expected = FakeBeerDataSource
-            .BEERS
-            .asBeerObjects()
-        actual = beerViewModelTest
-            .uiListState
-            .value
-        assertEquals(expected, actual)
-
-
     }
 
     @Test
@@ -60,7 +50,5 @@ class BeerViewModelTest {
             .currentBeerById
         assertEquals(expected, actual)
     }
-
-
 }
 

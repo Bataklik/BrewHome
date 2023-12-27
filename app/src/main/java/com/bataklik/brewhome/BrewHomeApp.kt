@@ -25,7 +25,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.bataklik.brewhome.layout.AppBar
 import com.bataklik.brewhome.layout.BottomBar
-import com.bataklik.brewhome.layout.BottomSheet
+import com.bataklik.brewhome.layout.BottomScaffold
 import com.bataklik.brewhome.ui.screens.BeerDetailScreen
 import com.bataklik.brewhome.ui.screens.DiscoverScreen
 import com.bataklik.brewhome.ui.screens.SearchScreen
@@ -43,7 +43,7 @@ fun BrewHomeApp(
 ) {
     // region Behandeling van BottomSheet
     /**
-     * SheetState wordt gebruikt om de [BottomSheet] te tonen.
+     * SheetState wordt gebruikt om de [BottomScaffold] te tonen.
      */
     val sheetState = rememberStandardBottomSheetState(
         initialValue = SheetValue.Hidden,
@@ -51,7 +51,7 @@ fun BrewHomeApp(
     )
 
     /**
-     * Opent de [BottomSheet].
+     * Opent de [BottomScaffold].
      */
     val openSheet = suspend {
         run {
@@ -60,7 +60,7 @@ fun BrewHomeApp(
     }
 
     /**
-     * Sluit de [BottomSheet].
+     * Sluit de [BottomScaffold].
      */
     val closeSheet = suspend {
         run {
@@ -70,7 +70,7 @@ fun BrewHomeApp(
 
     /**
      * ScaffoldState wordt gebruikt
-     * om de [BottomSheet] te tonen.
+     * om de [BottomScaffold] te tonen.
      */
     val scaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = sheetState,
@@ -116,6 +116,7 @@ fun BrewHomeApp(
      */
     val goToDiscover = {
         if (navController.currentBackStackEntry?.destination?.route != Screen.Discover.route) {
+
             navController.navigate(Screen.Discover.route) {
                 popUpTo(Screen.Search.route) {
                     inclusive = true
@@ -193,7 +194,7 @@ fun BrewHomeApp(
             .getSeachApiBeers(beerName)
     }
 
-    BottomSheet(
+    BottomScaffold(
         isLandscape = isLandscape,
         closeSheet = closeSheet,
         scaffoldState = scaffoldState,
@@ -234,7 +235,8 @@ fun BrewHomeApp(
                     }
                     composable(Screen.BeerDetail.route) {
                         BeerDetailScreen(
-                            beerDetailApiState = beerViewModel.beerDetailApiState,
+                            beerDetailApiState = beerViewModel
+                                .beerDetailApiState,
                             addBeerToFavorites = { addBeerToFavorites() },
                             isBeerInFavorites = isBeerInFavorites
                         )
@@ -242,7 +244,8 @@ fun BrewHomeApp(
 
                     composable(Screen.Search.route) {
                         SearchScreen(
-                            beerSearchApiState = beerViewModel.beerSeachApiState,
+                            beerSearchApiState = beerViewModel
+                                .beerSeachApiState,
                             getBeersByName = searchBeersByName,
                             goToDetail = goToDetail
                         )

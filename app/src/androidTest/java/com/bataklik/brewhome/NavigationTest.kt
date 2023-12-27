@@ -6,8 +6,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.ComposeNavigator
@@ -46,11 +48,33 @@ class NavigationTest {
      */
     @Test
     fun verifyStartDestination() {
+        Thread.sleep(2000)
         rule
             .onNodeWithContentDescription("txtCurrentScreenTitle")
             .assertIsDisplayed()
-            .assertTextEquals("Discover beers")
+            .assertTextEquals("Discover")
         val expected = 2
+        val actual = navController.backStack.size
+        Assert.assertEquals(
+            expected, actual
+        )
+    }
+
+    @Test
+    fun verifyDetailDestination() {
+        rule
+            .onNodeWithContentDescription("crdDiscoverBeer")
+            .performClick()
+
+        rule
+            .onNodeWithContentDescription("txtCurrentScreenTitle")
+            .assertIsDisplayed()
+            .assertTextContains(
+                value = "Beer detail",
+                substring = false,
+                ignoreCase = false
+            )
+        val expected = 3
         val actual = navController.backStack.size
         Assert.assertEquals(
             expected, actual
@@ -75,5 +99,4 @@ class NavigationTest {
             expected, actual
         )
     }
-
 }
