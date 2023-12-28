@@ -13,7 +13,7 @@ import org.junit.Rule
 import org.junit.Test
 
 
-class BeerViewModelTest {
+class BeerViewModelTests {
     @get:Rule
     val testDispatcher = TestDispatcherRule()
 
@@ -50,5 +50,6 @@ class BeerViewModelTest {
             .currentBeerById
         assertEquals(expected, actual)
     }
+
 }
 

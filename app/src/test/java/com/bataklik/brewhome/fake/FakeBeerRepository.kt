@@ -34,8 +34,4 @@ class FakeBeerRepository : BeerRepository {
             .BEER_DETAIL
             .asBeerObject()
     }
-
-    override suspend fun getBeerByName(beerName: String): List<Beer> {
-        TODO("Not yet implemented")
-    }
 }

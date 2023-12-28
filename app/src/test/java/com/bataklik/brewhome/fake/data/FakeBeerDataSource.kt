@@ -38,6 +38,17 @@ object FakeBeerDataSource {
         )
     )
 
+    val BEER_BY_NAME = listOf(
+        ApiBeer(
+            id = BEER_ID_ONE,
+            name = BEER_NAME_ONE,
+            tagline = BEER_TAGLINE_ONE,
+            imageUrl = BEER_IMAGE_ONE,
+            firstBrewed = BEER_FIRST_BREW_ONE,
+            abv = BEER_ABV_ONE
+        )
+    )
+
     val BEER_DETAIL = ApiBeerDetail(
         id = BEER_ID_ONE,
         name = BEER_NAME_ONE,
