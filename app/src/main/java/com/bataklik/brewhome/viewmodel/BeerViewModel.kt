@@ -54,8 +54,6 @@ class BeerViewModel(
         private set
     var beerDetailApiState: BeerDetailApiState by mutableStateOf(BeerDetailApiState.LoadingBeer)
         private set
-    var beerSeachApiState: BeerSearchApiState by mutableStateOf(BeerSearchApiState.LoadingBeers)
-        private set
 
     /**
      * Initialiseert de ViewModel en haalt de lijst met bieren op van de API.
@@ -88,35 +86,6 @@ class BeerViewModel(
             } catch (e: IOException) {
                 BeerApiState
                     .ErrorBeers
-            }
-        }
-    }
-
-
-
-    /**
-     * Zoekt bieren op basis van [beerName] en werkt [BeerSearchApiState] bij.
-     * Deze functie start een coroutine binnen de [viewModelScope] om de API-oproep uit te voeren. Als de oproep succesvol is,
-     * wordt [BeerSearchApiState.SuccessSearchBeers] met de opgehaalde bieren teruggegeven. Bij een fout wordt
-     * [BeerSearchApiState.ErrorBeers] ingesteld.
-     * @param beerName Naam van het bier om op te zoeken.
-     * @see beerRepository
-     * @see BeerSearchApiState
-     * @throws IOException Bij problemen met de API-oproep.
-     */
-    fun getSeachApiBeers(beerName: String) {
-        viewModelScope.launch {
-            beerSeachApiState = try {
-                if (beerName.isEmpty()) {
-                    BeerSearchApiState.SuccessSearchBeers(listOf())
-                }
-                val resultBeers = beerRepository
-                    .getBeerByName(beerName = beerName)
-                BeerSearchApiState
-                    .SuccessSearchBeers(resultBeers)
-            } catch (e: Exception) {
-                Timber.i("Failed to use api: $e")
-                BeerSearchApiState.ErrorBeers
             }
         }
     }

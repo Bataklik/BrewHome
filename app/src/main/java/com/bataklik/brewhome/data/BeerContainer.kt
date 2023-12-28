@@ -16,6 +16,7 @@ import retrofit2.Retrofit
 interface BeerContainer {
     val beerRepository: BeerRepository
     val favoriteBeerRepository: FavoriteBeerRepository
+    val beerSearchRepository:BeerSearchRepository
 }
 
 /**
@@ -74,10 +75,19 @@ class DefaultBeerContainer(applicationContext: Context) : BeerContainer {
         ApiBeerRepository(retrofitService)
     }
 
+
+
     /**
      * Implementatie van [FavoriteBeerRepository] voor het beheren van favoriete bieren
      */
     override val favoriteBeerRepository: FavoriteBeerRepository by lazy {
         CachingFavoriteBeerRepository(favoriteBeerDatabase.favoriteBeerDao())
+    }
+
+    /**
+     * Implementatie van [BeerSearchRepository] voor het ophalen van bierinformatie via de Beer API
+     */
+    override val beerSearchRepository: BeerSearchRepository by lazy{
+        ApiBeerSearchRepository(retrofitService)
     }
 }

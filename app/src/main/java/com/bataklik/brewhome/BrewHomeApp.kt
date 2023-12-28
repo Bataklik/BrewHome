@@ -29,6 +29,7 @@ import com.bataklik.brewhome.layout.BottomScaffold
 import com.bataklik.brewhome.ui.screens.BeerDetailScreen
 import com.bataklik.brewhome.ui.screens.DiscoverScreen
 import com.bataklik.brewhome.ui.screens.SearchScreen
+import com.bataklik.brewhome.viewmodel.BeerSearchViewModel
 import com.bataklik.brewhome.viewmodel.BeerViewModel
 import kotlinx.coroutines.runBlocking
 
@@ -39,6 +40,7 @@ import kotlinx.coroutines.runBlocking
 fun BrewHomeApp(
     navController: NavHostController = rememberNavController(),
     beerViewModel: BeerViewModel = viewModel(factory = BeerViewModel.Factory),
+    beerViewSearchModel: BeerSearchViewModel = viewModel(factory = BeerSearchViewModel.Factory),
     isLandscape: Boolean = false,
 ) {
     // region Behandeling van BottomSheet
@@ -190,7 +192,7 @@ fun BrewHomeApp(
      * Zoekt bieren op basis van de naam van het bier.
      */
     val searchBeersByName = { beerName: String ->
-        beerViewModel
+        beerViewSearchModel
             .getSeachApiBeers(beerName)
     }
 
@@ -244,7 +246,7 @@ fun BrewHomeApp(
 
                     composable(Screen.Search.route) {
                         SearchScreen(
-                            beerSearchApiState = beerViewModel
+                            beerSearchApiState = beerViewSearchModel
                                 .beerSeachApiState,
                             getBeersByName = searchBeersByName,
                             goToDetail = goToDetail
