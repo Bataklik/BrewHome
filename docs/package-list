@@ -1,0 +1,28 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:////PointingToDeclaration/app/[root]/index.html
+$dokka.location:/Screen.BeerDetail///PointingToDeclaration/app/[root]/-screen/-beer-detail/index.html
+$dokka.location:/Screen.BeerDetail/toString/#/PointingToDeclaration/app/[root]/-screen/-beer-detail/to-string.html
+$dokka.location:/Screen.Discover///PointingToDeclaration/app/[root]/-screen/-discover/index.html
+$dokka.location:/Screen.Discover/toString/#/PointingToDeclaration/app/[root]/-screen/-discover/to-string.html
+$dokka.location:/Screen.Search///PointingToDeclaration/app/[root]/-screen/-search/index.html
+$dokka.location:/Screen.Search/toString/#/PointingToDeclaration/app/[root]/-screen/-search/to-string.html
+$dokka.location:/Screen///PointingToDeclaration/app/[root]/-screen/index.html
+$dokka.location:/Screen/route/#/PointingToDeclaration/app/[root]/-screen/route.html
+module:app
+com.bataklik.brewhome
+com.bataklik.brewhome.data
+com.bataklik.brewhome.data.database
+com.bataklik.brewhome.fake
+com.bataklik.brewhome.fake.data
+com.bataklik.brewhome.layout
+com.bataklik.brewhome.layout.components
+com.bataklik.brewhome.model
+com.bataklik.brewhome.network
+com.bataklik.brewhome.ui.components.beerDetail
+com.bataklik.brewhome.ui.components.discover
+com.bataklik.brewhome.ui.components.favorites
+com.bataklik.brewhome.ui.components.search
+com.bataklik.brewhome.ui.screens
+com.bataklik.brewhome.ui.theme
+com.bataklik.brewhome.viewmodel

@@ -6,14 +6,26 @@ plugins {
     id("org.jetbrains.dokka") version "1.9.10"
 }
 
-subprojects {
-    apply(plugin = "org.jetbrains.dokka")
-    tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
-        doFirst {
-            println("Running Dokka task for $name")
-        }
-        doLast {
-            println("Dokka Output Directory for $name: $outputDirectory")
-        }
+tasks.dokkaHtmlMultiModule {
+    moduleName.set("BrewHome")
+    outputDirectory.set(file("docs"))
+    subprojects {
+        apply(plugin = "org.jetbrains.dokka")
+        //? Unit tests source set
+        tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>()
+            .configureEach {
+                val dokkaSourceSet = dokkaSourceSets
+                    .create("unit.tests")
+                dokkaSourceSet
+                    .sourceRoot("src/test/java")
+            }
+        //? Instrumentation tests source set
+        tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>()
+            .configureEach {
+                val dokkaSourceSet = dokkaSourceSets
+                    .create("instrumentation.tests")
+                dokkaSourceSet
+                    .sourceRoot("src/androidTest/java")
+            }
     }
 }
