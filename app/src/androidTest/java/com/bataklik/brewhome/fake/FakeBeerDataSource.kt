@@ -1,7 +1,6 @@
 package com.bataklik.brewhome.fake
 
 import com.bataklik.brewhome.model.Beer
-import com.bataklik.brewhome.network.ApiBeer
 
 object FakeBeerDataSource {
     private const val BEER_ID_ONE = 1
