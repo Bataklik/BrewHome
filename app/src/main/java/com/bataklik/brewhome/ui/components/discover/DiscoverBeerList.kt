@@ -25,7 +25,6 @@ import com.bataklik.brewhome.R
 import com.bataklik.brewhome.layout.components.NoItemsCard
 import com.bataklik.brewhome.network.BeerApiState
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun DiscoverBeerList(
     modifier: Modifier = Modifier,
