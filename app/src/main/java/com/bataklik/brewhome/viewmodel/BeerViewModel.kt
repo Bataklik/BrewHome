@@ -171,7 +171,7 @@ class BeerViewModel(
     }
 
     /**
-     * Companion object voor [BeerViewModel] om een [ViewModelProvider.Factory] te verstrekken.
+     * [Companion] object voor [BeerViewModel] om een [ViewModelProvider.Factory] te verstrekken.
      */
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
