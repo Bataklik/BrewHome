@@ -2,6 +2,10 @@
 
 HomeBrew is een prachtige Android-applicatie gebouwd met Jetpack Compose waarmee je verschillende bieren kunt verkennen, afkomstig van de Punk API (https://punkapi.com/). Met HomeBrew kun je door een uitgebreide verzameling bieren bladeren, gedetailleerde informatie over elk bier bekijken en zelfs een lijst van favoriete bieren maken.
 
+## Documentatie
+Bekijk de [Dokka-documentatie](https://brew-home.vercel.app/) voor meer gedetailleerde informatie over de broncode en interne structuur van de app.
+
+
 ## Functies
 
 - **Biercatalogus**: Verken een divers scala aan bieren die zijn opgehaald uit de Punk API.
