@@ -13,13 +13,7 @@ class FakeBeerRepository : BeerRepository {
             .BEERS
             .asBeerObjects()
     }
-
-    override suspend fun getBeers(page: Int, perPage: Int): List<Beer> {
-        return FakeBeerDataSource
-            .BEERS
-            .asBeerObjects()
-    }
-
+    
     override suspend fun getRandomBeer(): List<Beer> {
         return listOf(
             FakeBeerDataSource
