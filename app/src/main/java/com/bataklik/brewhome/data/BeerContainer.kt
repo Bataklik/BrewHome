@@ -14,8 +14,17 @@ import retrofit2.Retrofit
  * Een [BeerContainer] biedt toegang tot repositories voor het ophalen van bierinformatie en favoriete bieren.
  */
 interface BeerContainer {
+    /**
+     * Repository voor het ophalen van bierinformatie
+     */
     val beerRepository: BeerRepository
+    /**
+     * Repository voor het beheren van favoriete bieren
+     */
     val favoriteBeerRepository: FavoriteBeerRepository
+    /**
+     * Repository voor het ophalen van gezochte bierinformatie
+     */
     val beerSearchRepository:BeerSearchRepository
 }
 

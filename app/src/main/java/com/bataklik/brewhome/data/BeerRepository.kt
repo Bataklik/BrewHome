@@ -16,30 +16,18 @@ interface BeerRepository {
      * @return Een lijst met [Beer] objecten die de informatie van de beschikbare bieren bevatten.
      */
     suspend fun getBeers(): List<Beer>
-    /**
-     * Haal een paginering van bieren op van de Beer API.
-     * @param page De paginanummer van de resultaten.
-     * @param perPage Het aantal resultaten per pagina.
-     * @return Een lijst met [Beer] objecten die de informatie van de opgegeven paginering bevatten.
-     */
-    suspend fun getBeers(
-        page: Int,
-        perPage: Int
-    ): List<Beer>
 
     /**
-     * Haal een willekeurig bier op van de Beer API.
+     * Haal een willekeurig [Beer] op van de Beer API.
      * @return Een lijst met [Beer] objecten die de informatie van het willekeurige bier bevatten.
      */
     suspend fun getRandomBeer(): List<Beer>
     /**
-     * Haal gedetailleerde informatie op over een specifiek bier aan de hand van het opgegeven bier-ID.
+     * Haal gedetailleerde informatie op over een specifiek [BeerDetail] aan de hand van het opgegeven bier-ID.
      * @param beerId Het unieke ID van het bier.
      * @return Een [BeerDetail] object dat de gedetailleerde informatie van het opgehaalde bier bevat.
      */
     suspend fun getBeerById(beerId: Int): BeerDetail
-
-
 }
 
 /**
@@ -49,7 +37,7 @@ interface BeerRepository {
 class ApiBeerRepository(private val beerApiService: BeerApiService) : BeerRepository {
 
     /**
-     * Haal een lijst op van alle beschikbare bieren van de Beer API.
+     * Haal een lijst op van alle beschikbare [Beer]-objecten van de Beer API.
      * @return Een lijst met [Beer] objecten die de informatie van de beschikbare bieren bevatten.
      */
     override suspend fun getBeers(): List<Beer> {
@@ -58,21 +46,9 @@ class ApiBeerRepository(private val beerApiService: BeerApiService) : BeerReposi
             .asBeerObjects()
     }
 
-    /**
-     * Haal een paginering van bieren op van de Beer API.
-     * @param page De paginanummer van de resultaten.
-     * @param perPage Het aantal resultaten per pagina.
-     * @return Een lijst met [Beer] objecten die de informatie van de opgegeven paginering bevatten.
-     */
-    override suspend fun getBeers(page: Int, perPage: Int): List<Beer> {
-        return beerApiService
-            .getBeers(page = page, perPage = perPage)
-            .asBeerObjects()
-    }
-
 
     /**
-     * Haal een willekeurig bier op van de Beer API.
+     * Haal een willekeurig [Beer] op van de Beer API.
      * @return Een lijst met [Beer] objecten die de informatie van het willekeurige bier bevatten.
      */
     override suspend fun getRandomBeer(): List<Beer> {
@@ -82,7 +58,7 @@ class ApiBeerRepository(private val beerApiService: BeerApiService) : BeerReposi
     }
 
     /**
-     * Haal gedetailleerde informatie op over een specifiek bier aan de hand van het opgegeven bier-ID.
+     * Haal gedetailleerde informatie op over een specifiek [BeerDetail] aan de hand van het opgegeven bier-ID.
      * @param beerId Het unieke ID van het bier.
      * @return Een [BeerDetail] object dat de gedetailleerde informatie van het opgehaalde bier bevat.
      */

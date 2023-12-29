@@ -36,11 +36,11 @@ interface FavoriteBeerDao {
 
     /**
      * Haal een favoriet bier op aan de hand van het opgegeven bier-ID.
-     * @param routeId Het unieke ID van het favoriete bier.
+     * @param beerId Het unieke ID van het favoriete bier.
      * @return Een [DbFavoriteBeer]-object dat het favoriete bier vertegenwoordigt.
      */
-    @Query("SELECT * FROM DbFavoriteBeer WHERE id = :routeId")
-    fun getFavoriteBeerById(routeId: Int): DbFavoriteBeer
+    @Query("SELECT * FROM DbFavoriteBeer WHERE id = :beerId")
+    fun getFavoriteBeerById(beerId: Int): DbFavoriteBeer
 
     /**
      * Controleer of een bier zich in de lijst met favoriete bieren bevindt.

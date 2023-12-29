@@ -32,7 +32,7 @@ import timber.log.Timber
 import java.io.IOException
 
 /**
- * ViewModel voor biergegevens en API-oproepen.
+ * [ViewModel] voor [Beer]-gegevens en API-oproepen.
  * @param beerRepository Repository voor biergegevens van de API.
  * @param favoriteBeerRepository Repository voor favoriete bieren.
  */
@@ -161,12 +161,12 @@ class BeerViewModel(
     }
 
     /**
-     * Controleert of bier met [routeId] in favorieten staat.
+     * Controleert of [Beer] met [beerId] in favorieten staat.
      * @param routeId Het unieke identificatienummer van het te controleren bier.
      */
-    suspend fun isBeerInFavorites(routeId: Int): Boolean {
+    suspend fun isBeerInFavorites(beerId: Int): Boolean {
         return withContext(Dispatchers.IO) {
-            favoriteBeerRepository.isBeerInFavorites(routeId)
+            favoriteBeerRepository.isBeerInFavorites(beerId)
         }
     }
 

@@ -7,18 +7,18 @@ import com.bataklik.brewhome.network.asBeerObjects
 
 interface BeerSearchRepository{
     /**
-     * Haal gedetailleerde informatie op over een specifiek bier aan de hand van het opgegeven bier-ID.
+     * Haal informatie op over een specifieke [Beer]-objecten aan de hand van het opgegeven [beerName].
      * @param beerName De naam van het bier.
-     * @return Een ljst met [BeerDetail] objecten dat de gedetailleerde informatie van het opgehaalde bier bevat.
+     * @return Een lijst met [Beer]-objecten van het opgehaalde bier bevat.
      */
     suspend fun getBeerByName(beerName: String): List<Beer>
 }
 
 class ApiBeerSearchRepository(private val beerApiService: BeerApiService):BeerSearchRepository{
     /**
-     * Haal gedetailleerde informatie op over een specifiek bier aan de hand van het opgegeven bier-ID.
-     * @param beerName Het unieke ID van het bier.
-     * @return Een lijst [Beer] objecten dat de gedetailleerde informatie van het opgehaalde bier bevat.
+     * Haal informatie op over een specifieke [Beer]-objecten aan de hand van het opgegeven [beerName].
+     * @param beerName Het beer NAAM van de bieren.
+     * @return Een lijst [Beer]-objecten van het opgehaalde bieren bevat.
      */
     override suspend fun getBeerByName(beerName: String): List<Beer> {
         return beerApiService

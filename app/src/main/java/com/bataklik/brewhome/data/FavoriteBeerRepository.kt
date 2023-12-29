@@ -12,38 +12,38 @@ import timber.log.Timber
 
 /**
  * Repository-interface voor het beheren van favoriete bieren in de lokale database met behulp van Room.
- * Biedt methoden voor het toevoegen, verwijderen en ophalen van favoriete bieren, evenals controle of een bier in de favorietenlijst staat.
+ * Biedt methoden voor het toevoegen, verwijderen en ophalen van favoriete [Beer]-objecten, evenals controle of een [Beer]-object in de favorietenlijst staat.
  */
 interface FavoriteBeerRepository {
     /**
-     * Voeg een bier toe aan de lijst met favoriete bieren.
+     * Voeg een [Beer] toe aan de lijst met favoriete bieren.
      * @param favBeer Het [Beer]-object dat moet worden toegevoegd aan de favorietenlijst.
      */
     suspend fun insertFavoriteBeer(favBeer: Beer)
 
     /**
-     * Verwijder een favoriet bier uit de lijst met favoriete bieren.
+     * Verwijder een favoriet [Beer] uit de lijst met favoriete [DbFavoriteBeer]-objecten.
      * @param favBeer Het [DbFavoriteBeer]-object dat moet worden verwijderd uit de favorietenlijst.
      */
     suspend fun deletefavoriteBeer(favBeer: DbFavoriteBeer)
 
     /**
-     * Haal een stroom van alle favoriete bieren op.
+     * Haal een stroom van alle favoriete [Beer]-objecten op.
      * @return Een [Flow] van lijsten met [Beer]-objecten die de favoriete bieren vertegenwoordigen.
      */
     fun getFavoriteBeers(): Flow<List<Beer>>
 
     /**
-     * Haal een favoriet bier op aan de hand van het opgegeven bier-ID.
+     * Haal een favoriet [Beer]-object op aan de hand van het opgegeven bier-ID.
      * @param beerId Het unieke ID van het favoriete bier.
      * @return Een [Beer]-object dat het favoriete bier vertegenwoordigt, of null als het niet gevonden is.
      */
     fun getFavoriteBeerById(beerId: Int): Beer?
 
     /**
-     * Controleer of een bier zich in de lijst met favoriete bieren bevindt.
+     * Controleer of een bier zich in de lijst met favoriete [Beer]-objecten bevindt.
      * @param beerId Het unieke ID van het bier.
-     * @return true als het bier in de favorietenlijst staat, anders false.
+     * @return true als het [Beer]-object in de favorietenlijst staat, anders false.
      */
     fun isBeerInFavorites(beerId: Int): Boolean
 }
@@ -57,7 +57,7 @@ class CachingFavoriteBeerRepository(
 ) : FavoriteBeerRepository {
 
     /**
-     * Voeg een bier toe aan de lijst met favoriete bieren.
+     * Voeg een [Beer]-object toe aan de lijst met favoriete bieren.
      * @param favBeer Het [Beer]-object dat moet worden toegevoegd aan de favorietenlijst.
      */
     override suspend fun insertFavoriteBeer(favBeer: Beer) {
@@ -66,7 +66,7 @@ class CachingFavoriteBeerRepository(
     }
 
     /**
-     * Verwijder een favoriet bier uit de lijst met favoriete bieren.
+     * Verwijder een favoriet [Beer] uit de lijst met favoriete [DbFavoriteBeer]-objecten.
      * @param favBeer Het [DbFavoriteBeer]-object dat moet worden verwijderd uit de favorietenlijst.
      */
     override suspend fun deletefavoriteBeer(favBeer: DbFavoriteBeer) {
@@ -75,7 +75,7 @@ class CachingFavoriteBeerRepository(
     }
 
     /**
-     * Haal een stroom van alle favoriete bieren op.
+     * Haal een stroom van alle favoriete [Beer]-objecten op.
      * @return Een [Flow] van lijsten met [Beer]-objecten die de favoriete bieren vertegenwoordigen.
      */
     override fun getFavoriteBeers(): Flow<List<Beer>> {
