@@ -162,7 +162,7 @@ class BeerViewModel(
 
     /**
      * Controleert of [Beer] met [beerId] in favorieten staat.
-     * @param routeId Het unieke identificatienummer van het te controleren bier.
+     * @param beerId Het unieke identificatienummer van het te controleren bier.
      */
     suspend fun isBeerInFavorites(beerId: Int): Boolean {
         return withContext(Dispatchers.IO) {
