@@ -37,7 +37,9 @@ class NavigationTest {
             BrewHomeTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme
+                        .colorScheme
+                        .background
                 ) {
                     BrewHomeApp(navController)
                 }
@@ -50,13 +52,16 @@ class NavigationTest {
      */
     @Test
     fun verifyStartDestination() {
-        Thread.sleep(2000)
+        Thread
+            .sleep(2000)
         rule
             .onNodeWithContentDescription("txtCurrentScreenTitle")
             .assertIsDisplayed()
             .assertTextEquals("Discover")
         val expected = 2
-        val actual = navController.backStack.size
+        val actual = navController
+            .backStack
+            .size
         Assert.assertEquals(
             expected, actual
         )
@@ -78,7 +83,9 @@ class NavigationTest {
                 ignoreCase = false
             )
         val expected = 3
-        val actual = navController.backStack.size
+        val actual = navController
+            .backStack
+            .size
         Assert.assertEquals(
             expected, actual
         )
@@ -97,7 +104,35 @@ class NavigationTest {
             .assertIsDisplayed()
             .assertTextEquals("Search")
         val expected = 2
-        val actual = navController.backStack.size
+        val actual = navController
+            .backStack
+            .size
+        Assert.assertEquals(
+            expected, actual
+        )
+    }
+
+    /**
+     * Controleert of de favorieten scherm juiste titel heeft
+     */
+    @Test
+    fun verifyFavoriteDestination() {
+        Thread
+            .sleep(2000)
+        rule
+            .onNodeWithContentDescription("btnGoFavorite")
+            .performClick()
+        rule
+            .onNodeWithContentDescription("txtFavoriteScreenTitle")
+            .assertTextContains(
+                "Favorites",
+                ignoreCase = false,
+                substring = false
+            )
+        val expected = 2
+        val actual = navController
+            .backStack
+            .size
         Assert.assertEquals(
             expected, actual
         )

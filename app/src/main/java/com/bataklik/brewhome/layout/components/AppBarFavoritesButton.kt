@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.bataklik.brewhome.R
 import kotlinx.coroutines.CoroutineScope
@@ -33,19 +35,35 @@ fun AppBarFavoritesButton(
         coroutineScope.launch {
             openSheet()
         }
-    }, content = {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                modifier = modifier.size(28.dp),
-                tint = MaterialTheme.colorScheme.tertiary,
-                painter = painterResource(id = R.drawable.favorite_24px),
-                contentDescription = null
-            )
-            Spacer(modifier = modifier.width(width = 4.dp))
-            Text(
-                text = "Favorites",
-                color = MaterialTheme.colorScheme.tertiary,
-            )
-        }
-    })
+
+    }, modifier = modifier
+        .semantics { contentDescription = "btnGoFavorite" },
+        content = {
+            Row(
+                verticalAlignment = Alignment
+                    .CenterVertically
+            ) {
+                Icon(
+                    modifier = modifier
+                        .size(28.dp),
+                    tint = MaterialTheme
+                        .colorScheme
+                        .tertiary,
+                    painter = painterResource(id = R.drawable.favorite_24px),
+                    contentDescription = "iconFavorites"
+                )
+                Spacer(
+                    modifier = modifier
+                        .width(width = 4.dp)
+                )
+                Text(
+                    text = "Favorites",
+                    color = MaterialTheme
+                        .colorScheme
+                        .tertiary,
+                    modifier = modifier
+                        .semantics { contentDescription = "txtFavoriteScreenTitle" }
+                )
+            }
+        })
 }

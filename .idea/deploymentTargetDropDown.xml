@@ -2,9 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="All Tests">
-        <State />
-      </entry>
       <entry key="MainActivity">
         <State>
           <targetSelectedWithDropDown>
@@ -28,6 +25,9 @@
         <State />
       </entry>
       <entry key="verifyDetailDestination()">
+        <State />
+      </entry>
+      <entry key="verifyFavoriteDestination()">
         <State />
       </entry>
     </value>
