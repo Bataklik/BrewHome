@@ -9,6 +9,9 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithContentDescription
+import androidx.compose.ui.test.onChild
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.ComposeNavigator
@@ -61,9 +64,9 @@ class NavigationTest {
 
     @Test
     fun verifyDetailDestination() {
-        //TODO: Werkt nog niet
         rule
-            .onNodeWithContentDescription("crdDiscoverBeer")
+            .onAllNodesWithContentDescription("crdDiscoverBeer")
+            .onFirst()
             .performClick()
 
         rule
