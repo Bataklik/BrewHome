@@ -26,3 +26,4 @@ com.bataklik.brewhome.ui.components.search
 com.bataklik.brewhome.ui.screens
 com.bataklik.brewhome.ui.theme
 com.bataklik.brewhome.viewmodel
+com.bataklik.brewhome.viewmodel.states
