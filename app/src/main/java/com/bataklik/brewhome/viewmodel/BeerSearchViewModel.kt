@@ -9,10 +9,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.bataklik.brewhome.BeerApplication
-import com.bataklik.brewhome.data.BeerRepository
 import com.bataklik.brewhome.data.BeerSearchRepository
 import com.bataklik.brewhome.model.Beer
 import com.bataklik.brewhome.network.BeerSearchApiState
+import com.bataklik.brewhome.viewmodel.states.BeerSearchViewModelState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

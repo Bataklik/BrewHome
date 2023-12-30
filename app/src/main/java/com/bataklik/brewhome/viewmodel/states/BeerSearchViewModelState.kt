@@ -1,4 +1,4 @@
-package com.bataklik.brewhome.viewmodel
+package com.bataklik.brewhome.viewmodel.states
 
 import com.bataklik.brewhome.model.Beer
 

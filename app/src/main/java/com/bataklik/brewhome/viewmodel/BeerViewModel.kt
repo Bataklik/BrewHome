@@ -18,7 +18,7 @@ import com.bataklik.brewhome.model.BeerDetail
 import com.bataklik.brewhome.model.asBeer
 import com.bataklik.brewhome.network.BeerApiState
 import com.bataklik.brewhome.network.BeerDetailApiState
-import com.bataklik.brewhome.network.BeerSearchApiState
+import com.bataklik.brewhome.viewmodel.states.BeerViewModelState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
