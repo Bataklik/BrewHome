@@ -23,7 +23,6 @@ import timber.log.Timber
  * Copyright. All rights reserved
  * deze klasse is de hoofdactiviteit van dit project
  */
-
 class MainActivity() : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)

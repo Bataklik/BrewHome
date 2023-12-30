@@ -22,6 +22,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * De testklasse voor de navigatie.
+ * @property rule De regel die de test uitvoert.
+ * @see BrewHomeApp
+ */
 class NavigationTest {
     @get:Rule
     val rule = createComposeRule()
@@ -67,6 +72,9 @@ class NavigationTest {
         )
     }
 
+    /**
+     * Controleert of de detail scherm juiste titel heeft
+     */
     @Test
     fun verifyDetailDestination() {
         rule

@@ -32,9 +32,11 @@ import timber.log.Timber
 import java.io.IOException
 
 /**
- * [ViewModel] voor [Beer]-gegevens en API-oproepen.
- * @param beerRepository Repository voor biergegevens van de API.
- * @param favoriteBeerRepository Repository voor favoriete bieren.
+ * ViewModel voor het ophalen van bieren en het beheren van favorieten.
+ * @param beerRepository De repository voor het ophalen van bieren.
+ * @param favoriteBeerRepository De repository voor het beheren van favorieten.
+ * @see BeerRepository
+ * @see FavoriteBeerRepository
  */
 class BeerViewModel(
     private val beerRepository: BeerRepository,

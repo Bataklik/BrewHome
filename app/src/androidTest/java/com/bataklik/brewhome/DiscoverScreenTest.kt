@@ -13,6 +13,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * De testklasse voor het Discover-scherm.
+ * @property rule De regel die de test uitvoert.
+ * @see DiscoverScreen
+ */
 class DiscoverScreenTest {
     @get:Rule
     val rule = createComposeRule()

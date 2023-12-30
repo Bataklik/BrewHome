@@ -10,6 +10,11 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * De testklasse voor de BeerSearchRepository.
+ * @property repo De repository die getest wordt.
+ * @see BeerSearchRepository
+ */
 class BeerSearchRepositoryTests {
     private lateinit var repo: BeerSearchRepository
 
@@ -18,6 +23,9 @@ class BeerSearchRepositoryTests {
         repo = ApiBeerSearchRepository(FakeBeerApiService())
     }
 
+    /**
+     * Controleert of de lijst met bieren van de zoekterm juist is.
+     */
     @Test
     fun getBeer_ByName_verifyBeer() = runTest {
         val searchTerm = "Artois"

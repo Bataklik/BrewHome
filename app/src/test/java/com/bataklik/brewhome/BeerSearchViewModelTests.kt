@@ -11,6 +11,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * De testklasse voor de BeerSearchViewModel.
+ * @property beerViewModelTest De viewmodel die getest wordt.
+ * @see BeerSearchViewModel
+ */
 class BeerSearchViewModelTests {
     @get:Rule
     val testDispatcher = TestDispatcherRule()
@@ -22,7 +27,9 @@ class BeerSearchViewModelTests {
         beerViewModelTest = BeerSearchViewModel(FakeBeerSearchRepository())
     }
 
-
+    /**
+     * Controleert of de lijst met bieren van de zoekterm juist is.
+     */
     @Test
     fun searchBeer_verifyBeer() = runTest {
         val searchTerm = "Dog"

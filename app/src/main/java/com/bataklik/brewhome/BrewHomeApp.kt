@@ -33,6 +33,13 @@ import com.bataklik.brewhome.viewmodel.BeerSearchViewModel
 import com.bataklik.brewhome.viewmodel.BeerViewModel
 import kotlinx.coroutines.runBlocking
 
+/**
+ * Composable functie die de gehele applicatie weergeeft.
+ * @param navController De controller voor het navigeren tussen schermen.
+ * @param beerViewModel De ViewModel voor het ophalen van bieren.
+ * @param beerViewSearchModel De ViewModel voor het zoeken van bieren.
+ * @param isLandscape Geeft aan of het scherm in landscape-modus staat.
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)

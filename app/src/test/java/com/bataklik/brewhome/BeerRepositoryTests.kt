@@ -11,6 +11,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * De testklasse voor de BeerRepository.
+ * @property repo De repository die getest wordt.
+ * @see BeerRepository
+ */
 class BeerRepositoryTests {
     private lateinit var repo: BeerRepository
 
@@ -19,6 +24,9 @@ class BeerRepositoryTests {
         repo = ApiBeerRepository(FakeBeerApiService())
     }
 
+    /**
+     * Controleert of de lijst met bieren juist is.
+     */
     @Test
     fun getBeers_veryBeersList() = runTest {
         val expected = FakeBeerDataSource
@@ -29,7 +37,9 @@ class BeerRepositoryTests {
         assertEquals(expected, actual)
     }
 
-
+    /**
+     * Controleert of het bier met de juiste id wordt opgehaald.
+     */
     @Test
     fun getBeer_byId_veryBeer() = runTest {
         val expected = FakeBeerDataSource

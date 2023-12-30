@@ -13,6 +13,11 @@ import org.junit.Rule
 import org.junit.Test
 
 
+/**
+ * De testklasse voor de BeerViewModel.
+ * @property beerViewModelTest De viewmodel die getest wordt.
+ * @see BeerViewModel
+ */
 class BeerViewModelTests {
     @get:Rule
     val testDispatcher = TestDispatcherRule()
@@ -24,7 +29,9 @@ class BeerViewModelTests {
         beerViewModelTest = BeerViewModel(FakeBeerRepository(), FakeFavoriteBeerRepository())
     }
 
-
+    /**
+     * Controleert of de lijst met bieren juist is.
+     */
     @Test
     fun getBeers_verifyBeersList() = runTest {
         val expected = FakeBeerDataSource
@@ -37,6 +44,9 @@ class BeerViewModelTests {
         assertEquals(expected, actual)
     }
 
+    /**
+     * Controleert of het bier met de juiste id wordt opgehaald.
+     */
     @Test
     fun getBeer_verifyBeer() = runTest {
         val expected = FakeBeerDataSource

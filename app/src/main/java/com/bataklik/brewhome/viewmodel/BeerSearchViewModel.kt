@@ -21,7 +21,11 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
 
-
+/**
+ * ViewModel voor het zoeken van bieren.
+ * @param beerSearchRepository De repository voor het zoeken van bieren.
+ * @see BeerSearchRepository
+ */
 class BeerSearchViewModel(private val beerSearchRepository: BeerSearchRepository) : ViewModel() {
 
     // Staat van de UI-gegevens
