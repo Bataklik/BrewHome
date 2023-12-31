@@ -17,6 +17,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+/**
+ * Een kaart die wordt weergegeven als er geen items zijn.
+ */
 @Composable
 fun NoItemsCard(
     modifier: Modifier,

@@ -10,6 +10,9 @@ class FakeBeerApiService : BeerApiService {
         TODO("Not yet implemented")
     }
 
+    /**
+     * Haal gedetailleerde informatie op over een specifiek bier aan de hand van het opgegeven bier-ID.
+     */
     override suspend fun getBeerById(beerId: Int): List<ApiBeerDetail> {
         return listOf(
             FakeBeerDataSource
@@ -17,17 +20,20 @@ class FakeBeerApiService : BeerApiService {
         )
     }
 
+
+    /**
+     * Haal gedetailleerde informatie op over een specifiek bier aan de hand van het opgegeven bier-NAAM.
+     */
     override suspend fun getBeerByName(beerName: String): List<ApiBeer> {
         return FakeBeerDataSource
             .BEER_BY_NAME
     }
 
+    /**
+     * Haal een lijst op van alle beschikbare bieren van de API.
+     */
     override suspend fun getBeers(): List<ApiBeer> {
         return FakeBeerDataSource
             .BEERS
-    }
-
-    override suspend fun getBeers(page: Int, perPage: Int): List<ApiBeer> {
-        TODO("Not yet implemented")
     }
 }

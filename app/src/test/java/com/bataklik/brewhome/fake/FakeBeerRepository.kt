@@ -7,6 +7,10 @@ import com.bataklik.brewhome.model.BeerDetail
 import com.bataklik.brewhome.network.asBeerObject
 import com.bataklik.brewhome.network.asBeerObjects
 
+/**
+ * De nep repository voor de bieren.
+ * @see BeerRepository
+ */
 class FakeBeerRepository : BeerRepository {
     override suspend fun getBeers(): List<Beer> {
         return FakeBeerDataSource

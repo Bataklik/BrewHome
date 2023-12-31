@@ -2,6 +2,9 @@ package com.bataklik.brewhome.fake
 
 import com.bataklik.brewhome.model.Beer
 
+/**
+ * Valse data voor de AndroidTesten
+ */
 object FakeBeerDataSource {
     private const val BEER_ID_ONE = 1
     private const val BEER_NAME_ONE = "Stella Artois"

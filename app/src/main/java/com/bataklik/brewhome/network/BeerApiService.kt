@@ -43,15 +43,4 @@ interface BeerApiService {
     @GET("beers")
     suspend fun getBeers(): List<ApiBeer>
 
-    /**
-     * Haal een paginering van bieren op van de API.
-     * @param page De paginanummer van de resultaten.
-     * @param perPage Het aantal resultaten per pagina.
-     * @return Een lijst met [ApiBeer] objecten die de informatie van de opgegeven paginering bevatten.
-     */
-    @GET("beers")
-    suspend fun getBeers(
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int
-    ): List<ApiBeer>
 }

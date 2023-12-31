@@ -9,6 +9,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.bataklik.brewhome.R
 import com.bataklik.brewhome.layout.components.NoItemsCard
@@ -34,7 +36,8 @@ fun SearchList(
     LazyColumn(
         modifier = modifier
             .padding(horizontal = 10.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .semantics { contentDescription = "lstSearchBeers" },
         verticalArrangement = Arrangement.spacedBy(5.dp),
         state = listState
     ) {

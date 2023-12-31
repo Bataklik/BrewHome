@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 
+/**
+ * De fake favorite data voor de unit tests.
+ */
 object FakeFavoriteDataSource {
 
     private const val BEER_ID_ONE = 1

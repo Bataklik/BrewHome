@@ -18,7 +18,7 @@ import org.junit.Test
  * @property rule De regel die de test uitvoert.
  * @see DiscoverScreen
  */
-class DiscoverScreenTest {
+class DiscoverScreenTests {
     @get:Rule
     val rule = createComposeRule()
 

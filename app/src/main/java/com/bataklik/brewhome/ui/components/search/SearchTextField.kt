@@ -20,8 +20,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bataklik.brewhome.ui.theme.BrewHomeTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -33,7 +37,8 @@ fun SearchTextField(
     val keyboardController = LocalSoftwareKeyboardController.current
     OutlinedTextField(
         shape = RoundedCornerShape(12.dp),
-        colors = TextFieldDefaults.colors(
+        colors = TextFieldDefaults
+            .colors(
             unfocusedContainerColor = MaterialTheme.colorScheme
                 .tertiary,
             unfocusedTextColor = MaterialTheme.colorScheme
@@ -57,7 +62,8 @@ fun SearchTextField(
         },
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp),
+            .padding(horizontal = 12.dp)
+            .semantics { contentDescription = "txtfSearch" },
         value = searchText,
         onValueChange = { text: String ->
             searchText = text
@@ -73,4 +79,15 @@ fun SearchTextField(
             }
         ),
     )
+}
+
+@Preview
+@Composable
+fun SearchTextFieldPreview() {
+    BrewHomeTheme {
+        SearchTextField(
+            modifier = Modifier,
+            onSearchAction = {}
+        )
+    }
 }

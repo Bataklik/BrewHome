@@ -10,7 +10,6 @@ import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
-import androidx.compose.ui.test.onChild
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
@@ -27,7 +26,7 @@ import org.junit.Test
  * @property rule De regel die de test uitvoert.
  * @see BrewHomeApp
  */
-class NavigationTest {
+class NavigationTests {
     @get:Rule
     val rule = createComposeRule()
     private lateinit var navController: TestNavHostController
@@ -41,7 +40,8 @@ class NavigationTest {
                 .addNavigator(ComposeNavigator())
             BrewHomeTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize(),
                     color = MaterialTheme
                         .colorScheme
                         .background

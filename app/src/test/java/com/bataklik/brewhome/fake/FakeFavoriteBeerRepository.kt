@@ -6,6 +6,10 @@ import com.bataklik.brewhome.fake.data.FakeFavoriteDataSource
 import com.bataklik.brewhome.model.Beer
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * De nep repository voor de favoriete bieren.
+ * @see FavoriteBeerRepository
+ */
 class FakeFavoriteBeerRepository : FavoriteBeerRepository {
 
 

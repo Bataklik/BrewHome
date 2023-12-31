@@ -3,6 +3,9 @@ package com.bataklik.brewhome.fake.data
 import com.bataklik.brewhome.network.ApiBeer
 import com.bataklik.brewhome.network.ApiBeerDetail
 
+/**
+ * De fake data voor de unit tests.
+ */
 object FakeBeerDataSource {
     private const val BEER_ID_ONE = 1
     private const val BEER_NAME_ONE = "Stella Artois"
