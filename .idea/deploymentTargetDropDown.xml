@@ -11,12 +11,6 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="verifyBeersBySearch()">
-        <State />
-      </entry>
-      <entry key="verifySearchScreenTitle()">
-        <State />
-      </entry>
     </value>
   </component>
 </project>
