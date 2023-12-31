@@ -22,7 +22,16 @@ jobs:
       - name: Build and run tests
         run: |
           ./gradlew test
+        continue-on-error: true
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: app/build/test-results
 
       - name: Display test results
-        if: ${{ success() }}
-        run: echo "Unit tests passed successfully."
+        uses: EnricoMi/junit2github@v3
+        with:
+          check_name: "AndroidTests Test Results"
+          report_paths: "**/test-results/*.xml"
