@@ -27,3 +27,7 @@ jobs:
       - name: Build and run unit tests
         run: |
           ./gradlew testDebugUnitTest
+
+      - name: Display test results
+        if: ${{ success() }}
+        run: echo "Unit tests passed successfully."
