@@ -14,29 +14,41 @@ Bekijk de [Dokka-documentatie](https://brew-home.vercel.app/) voor meer gedetail
 
 ## Screenshots
 <table style="max-width: 600px; width: 100%; margin: 0 auto;">
-  <tr>
-    <td align="center">
-      <div style="display: flex; flex-direction: column;">
-        <p>Homescherm - Ontdekken van bieren.</p>
-        <img src="https://github.com/Bataklik/BrewHome/assets/60544395/3e7989f3-3fc0-4b74-96f0-ab4cf1ca794e" width="180"/>
-      </div>
-    </td>
-    <td align="center">
-      <div style="display: flex; flex-direction: column;">
-        <p>Detailscherm - Duik in de details van een geselecteerd bier.</p>
-        <img src="https://github.com/Bataklik/BrewHome/assets/60544395/dafbf54e-42fa-4df4-922f-a7f9c73dded9" width="180"/>
-      </div>
-    </td>
-  </tr>
-  <tr>
-        <td align="center">
-      <div style="display: flex; flex-direction: column;">
-        <p>Favorietenscherm - Beheer je lijst met favoriete bieren.</p>
-        <img src="https://github.com/Bataklik/BrewHome/assets/60544395/74b1f01d-fc34-41c4-a0e4-2778808ab631" width="180"/>
-      </div>
-    </td>
-  </tr>
+   <tr>
+      <td align="center">
+         <div style="display: flex; flex-direction: column;">
+            <p>Homescherm - Ontdekken van bieren.</p>
+            <img src="https://github.com/Bataklik/BrewHome/assets/60544395/3e7989f3-3fc0-4b74-96f0-ab4cf1ca794e" width="180"/>
+         </div>
+      </td>
+      <td align="center">
+         <div style="display: flex; flex-direction: column;">
+            <p>Detailscherm - Duik in de details van een geselecteerd bier.</p>
+            <img src="https://github.com/Bataklik/BrewHome/assets/60544395/dafbf54e-42fa-4df4-922f-a7f9c73dded9" width="180"/>
+         </div>
+      </td>
+   </tr>
+   <tr>
+      <td align="center">
+         <div style="display: flex; flex-direction: column;">
+            <p>Favorietenscherm - Beheer je lijst met favoriete bieren.</p>
+            <img src="https://github.com/Bataklik/BrewHome/assets/60544395/74b1f01d-fc34-41c4-a0e4-2778808ab631" width="180"/>
+         </div>
+      </td>
+      <td align="center">
+         <div style="display: flex; flex-direction: column;">
+         <p>Zoekscherm - Zoek je lijst met bieren.</p>
+         <img src="https://github.com/Bataklik/BrewHome/assets/60544395/837f04d1-bf0f-4863-9792-1ec65d1d48cd" width="180"/>
+      </td>
+   </tr>
+   <tr>
+      <td align="center">
+         <div style="display: flex; flex-direction: column;">
+         <p>Zoekscherm - Zoeken op zoekterm 'Dog'.</p>
+         <img src="https://github.com/Bataklik/BrewHome/assets/60544395/4f634cff-946b-4996-9f96-8a7b837505d5" width="180"/>
+   </tr>
 </table>
+
 
 ## Gebruik
 
