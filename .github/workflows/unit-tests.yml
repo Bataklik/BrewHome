@@ -36,7 +36,7 @@ jobs:
           path: app/build/test-results
 
       - name: Display test results
-        uses: EnricoMi/junit2github@v3
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           check_name: "UnitTests Test Results"
           report_paths: "**/test-results/*.xml"
