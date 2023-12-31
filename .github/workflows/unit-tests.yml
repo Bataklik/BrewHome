@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test:
+  UnitTests:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,8 +16,13 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          distribution: "adopt"
-          java-version: "11"
+          distribution: "openjdk"
+          java-version: "17"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
 
       - name: Build and run unit tests
         run: |
