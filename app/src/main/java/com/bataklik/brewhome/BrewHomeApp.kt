@@ -1,6 +1,5 @@
 package com.bataklik.brewhome
 
-import Screen
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -29,6 +28,7 @@ import com.bataklik.brewhome.layout.BottomScaffold
 import com.bataklik.brewhome.ui.screens.BeerDetailScreen
 import com.bataklik.brewhome.ui.screens.DiscoverScreen
 import com.bataklik.brewhome.ui.screens.SearchScreen
+import com.bataklik.brewhome.utils.Screen
 import com.bataklik.brewhome.viewmodel.BeerSearchViewModel
 import com.bataklik.brewhome.viewmodel.BeerViewModel
 import kotlinx.coroutines.runBlocking

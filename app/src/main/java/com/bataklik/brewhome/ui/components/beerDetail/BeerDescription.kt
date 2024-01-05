@@ -6,6 +6,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 
 @Composable
 fun BeerDescription(beerDescription: String) {
@@ -17,7 +19,8 @@ fun BeerDescription(beerDescription: String) {
         Text(
             text = beerDescription,
             color = MaterialTheme.colorScheme.secondary,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .semantics { contentDescription = "txtBeerDetailDescription"  },
             style = MaterialTheme.typography.bodyLarge
         )
     }

@@ -1,6 +1,5 @@
 package com.bataklik.brewhome.layout
 
-import Screen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.bataklik.brewhome.layout.components.AppBarBackButton
 import com.bataklik.brewhome.layout.components.AppBarFavoritesButton
 import com.bataklik.brewhome.layout.components.AppBarTitle
+import com.bataklik.brewhome.utils.Screen
 
 /**
  * Composable functie die de bovenste navigatiebalk (AppBar) weergeeft.

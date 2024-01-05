@@ -18,6 +18,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.bataklik.brewhome.R
 
@@ -41,7 +43,10 @@ private fun BeerTitleText(beerTitle: String) {
     Text(
         text = beerTitle,
         color = MaterialTheme.colorScheme.secondary,
-        style = MaterialTheme.typography.titleLarge
+        style = MaterialTheme.typography.titleLarge,
+        modifier = Modifier.semantics {
+            contentDescription = "txtBeerDetailTitle"
+        }
     )
 }
 
@@ -60,7 +65,7 @@ private fun BeerFavoriteLabel() {
     Text(
         text = "Favorite: ",
         color = MaterialTheme.colorScheme.secondary,
-        style = MaterialTheme.typography.titleMedium
+        style = MaterialTheme.typography.titleMedium,
     )
 }
 
